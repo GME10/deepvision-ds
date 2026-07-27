@@ -1,0 +1,153 @@
+/* ============================================================
+   DEEPVISION DESIGN SYSTEM — TOKENS
+   Fuente de verdad de color, tipografía, espaciado y forma.
+   MT2 · Sistema base para DeepVision, DIGI y productos futuros.
+   ============================================================ */
+
+:root {
+
+  /* --------------------------------------------------------
+     COLOR — ESCALA NEUTRAL (base del sistema)
+     Blanco y grises. El grueso de la UI vive acá.
+     -------------------------------------------------------- */
+  --neutral-0:   #FFFFFF;  /* fondos, superficies elevadas */
+  --neutral-50:  #F4F7F9;  /* fondo de página, hover de fila, headers de tabla */
+  --neutral-100: #E2E8ED;  /* bordes suaves, divisores */
+  --neutral-200: #BEC8D2;  /* bordes de input, iconos inactivos, placeholders fuertes */
+  --neutral-400: #7A8C99;  /* texto secundario, labels, iconos */
+  --neutral-500: #4A5A66;  /* texto de cuerpo, texto de énfasis medio */
+  --neutral-700: #1E2A33;  /* texto principal, títulos, tooltips */
+
+  /* --------------------------------------------------------
+     COLOR — VERDE (éxito / activo)
+     Base 500 = tu color original 56C27D
+     -------------------------------------------------------- */
+  --green-50:  #E8F6EE;  /* fondo de badge/toast/input-éxito */
+  --green-100: #C9EBD6;
+  --green-200: #A9E0C0;  /* borde */
+  --green-500: #56C27D;  /* base — punto de estado, iconos de éxito */
+  --green-700: #1E6B3D;  /* texto verde sobre fondo claro */
+
+  /* --------------------------------------------------------
+     COLOR — ROJO (error / cancelar / destructivo)
+     Base 500 = tu color original DE5049
+     -------------------------------------------------------- */
+  --red-50:  #FBECEB;
+  --red-100: #F5D3D1;
+  --red-200: #F0BBB8;  /* borde */
+  --red-500: #DE5049;  /* base — punto de estado, error */
+  --red-700: #8A2823;  /* texto rojo sobre fondo claro */
+
+  /* --------------------------------------------------------
+     COLOR — ÍNDIGO (programado / proceso / inteligencia)
+     Base 500 = 5D6AE0 (ajustado para armonizar con el semáforo)
+     700 = 494BDE (tu índigo original, ahora como tono profundo)
+     -------------------------------------------------------- */
+  --indigo-50:  #ECEDFB;
+  --indigo-100: #D5D8F5;
+  --indigo-200: #BEC2F0;  /* borde */
+  --indigo-500: #5D6AE0;  /* base — punto de estado "programada" */
+  --indigo-700: #494BDE;  /* texto índigo / énfasis profundo */
+
+  /* --------------------------------------------------------
+     COLOR — ÁMBAR (precaución / pausada)
+     Base 500 = tu color original DEC249
+     -------------------------------------------------------- */
+  --amber-50:  #FBF6E8;
+  --amber-100: #F5EBC9;
+  --amber-200: #F0E0A9;  /* borde */
+  --amber-500: #DEC249;  /* base — punto de estado "pausada", advertencia */
+  --amber-700: #8A7423;  /* texto ámbar sobre fondo claro */
+
+  /* --------------------------------------------------------
+     COLOR — AZUL DE ACCIÓN (botones, foco, links)
+     Base 500 = 3395C6 — NO confundir con índigo (estado).
+     Este azul = "hacer algo". Índigo = "estado del sistema".
+     -------------------------------------------------------- */
+  --action-50:  #E6F2F8;  /* fondo de fila seleccionada, toast info */
+  --action-100: #C0DEEC;
+  --action-200: #9AC9E0;
+  --action-500: #3395C6;  /* base — botón primario, borde de foco, links */
+  --action-600: #256F98;  /* hover del botón primario */
+  --action-700: #1B5A78;  /* texto azul / pressed */
+
+  /* --------------------------------------------------------
+     ROLES SEMÁNTICOS (alias legibles → apuntan a lo de arriba)
+     Usar estos en los componentes, no los hex directos.
+     -------------------------------------------------------- */
+  --surface-page:      var(--neutral-50);
+  --surface-card:      var(--neutral-0);
+  --surface-hover:     var(--neutral-50);
+
+  --text-primary:      var(--neutral-700);
+  --text-secondary:    var(--neutral-500);
+  --text-muted:        var(--neutral-400);
+  --text-placeholder:  var(--neutral-400);
+  --text-disabled:     var(--neutral-200);
+
+  --border-default:    var(--neutral-200);
+  --border-soft:       var(--neutral-100);
+  --border-focus:      var(--action-500);
+
+  --primary:           var(--action-500);
+  --primary-hover:     var(--action-600);
+  --primary-text:      var(--neutral-0);
+
+  --status-active:     var(--green-500);
+  --status-cancelled:  var(--red-500);
+  --status-scheduled:  var(--indigo-500);
+  --status-paused:     var(--amber-500);
+  --status-pending:    var(--neutral-400);
+
+  /* Score continuo 0–100 (indicador, no semáforo).
+     Umbrales: 0-40 low · 41-70 mid · 71-100 high */
+  --score-low:   var(--red-500);
+  --score-mid:   var(--amber-500);
+  --score-high:  var(--green-500);
+
+  /* --------------------------------------------------------
+     TIPOGRAFÍA
+     -------------------------------------------------------- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --text-xs:   12px;  /* labels, captions, metadata */
+  --text-sm:   13px;  /* texto de apoyo, celdas densas */
+  --text-base: 14px;  /* cuerpo, inputs, botones */
+  --text-md:   15px;  /* nombres, énfasis en listas */
+  --text-lg:   16px;  /* subtítulos de sección */
+  --text-xl:   22px;  /* títulos de página */
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;  /* usar con moderación — solo números KPI grandes */
+
+  /* --------------------------------------------------------
+     ESPACIADO (escala base 4)
+     -------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* --------------------------------------------------------
+     FORMA (radios y alturas)
+     -------------------------------------------------------- */
+  --radius-sm:   6px;   /* badges, opciones de dropdown, chips */
+  --radius-md:   8px;   /* inputs, botones, toasts */
+  --radius-lg:   10px;  /* menús desplegables */
+  --radius-card: 12px;  /* cards, contenedores, modales */
+  --radius-full: 9999px;/* pills, avatares, puntos de estado */
+
+  --control-height: 40px;  /* altura estándar de input y botón */
+
+  /* --------------------------------------------------------
+     ELEVACIÓN (sombras)
+     -------------------------------------------------------- */
+  --shadow-dropdown: 0 8px 24px rgba(30, 42, 51, 0.10);
+  --shadow-modal:    0 16px 48px rgba(30, 42, 51, 0.18);
+  --focus-ring:      0 0 0 3px rgba(51, 149, 198, 0.15);
+}

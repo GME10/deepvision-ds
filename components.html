@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepVision Design System — Componentes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+    h1 { font-size: var(--text-xl); font-weight: var(--weight-medium); margin: 0 0 4px; }
+    .lede { color: var(--text-secondary); margin: 0 0 40px; }
+    h2 { font-size: var(--text-lg); font-weight: var(--weight-medium); margin: 40px 0 6px; padding-top: 24px; border-top: 0.5px solid var(--border-soft); }
+    .note { font-size: var(--text-sm); color: var(--text-secondary); margin: 0 0 16px; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .swatch { height: 44px; border-radius: var(--radius-md); border: 0.5px solid rgba(0,0,0,0.06); }
+    .swatch-label { font-size: 11px; color: var(--text-muted); margin-top: 5px; font-family: monospace; }
+    .col { flex: 1; min-width: 88px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <h1>DeepVision Design System</h1>
+  <p class="lede">Sistema base de MT2. Blanco y gris como fundamento, semáforo de color para estados, azul de acción para interacción.</p>
+
+  <!-- ESCALA NEUTRAL -->
+  <h2>Escala neutral</h2>
+  <p class="note">El fundamento. La mayor parte de la UI vive en estos siete pasos.</p>
+  <div class="row">
+    <div class="col"><div class="swatch" style="background:var(--neutral-0); border:0.5px solid var(--neutral-100);"></div><div class="swatch-label">0 · FFFFFF</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-50);"></div><div class="swatch-label">50 · F4F7F9</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-100);"></div><div class="swatch-label">100 · E2E8ED</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-200);"></div><div class="swatch-label">200 · BEC8D2</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-400);"></div><div class="swatch-label">400 · 7A8C99</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-500);"></div><div class="swatch-label">500 · 4A5A66</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-700);"></div><div class="swatch-label">700 · 1E2A33</div></div>
+  </div>
+
+  <!-- GAMAS SEMÁNTICAS -->
+  <h2>Gamas semánticas</h2>
+  <p class="note">Tu color anclado en el paso 500. 50/100/200 hacia claros (fondos y bordes), 700 hacia oscuro (texto).</p>
+  <div id="ramps"></div>
+
+  <!-- BOTONES -->
+  <h2>Botones</h2>
+  <div class="row">
+    <button class="btn btn-primary">Primario</button>
+    <button class="btn btn-secondary">Secundario</button>
+    <button class="btn btn-destructive">Destructivo</button>
+    <button class="btn btn-disabled" disabled>Disabled</button>
+    <button class="btn btn-primary"><i class="ti ti-plus"></i>Con icono</button>
+  </div>
+
+  <!-- INPUTS -->
+  <h2>Inputs</h2>
+  <div class="grid">
+    <div><label class="field-label">Default</label><input class="input" placeholder="Placeholder…"></div>
+    <div><label class="field-label">Con valor</label><input class="input" value="correo@bricsa.cl"></div>
+    <div><label class="field-label">Error</label><input class="input input-error" value="correo-invalido"><div class="field-error-msg"><i class="ti ti-alert-triangle"></i>Ingresa un correo válido</div></div>
+    <div><label class="field-label">Éxito</label><input class="input input-success" value="correo@bricsa.cl"></div>
+    <div><label class="field-label">Disabled</label><input class="input" value="No editable" disabled></div>
+    <div><label class="field-label">Textarea</label><textarea class="textarea" placeholder="Escribe el cuerpo del mensaje…"></textarea></div>
+  </div>
+
+  <!-- ESTADOS (semáforo limpio) -->
+  <h2>Estados · semáforo (default)</h2>
+  <p class="note">Punto de color + texto neutro. Limpio, sin badges. Es la regla del sistema.</p>
+  <div class="row">
+    <span class="status"><span class="status-dot dot-active"></span>Activa</span>
+    <span class="status"><span class="status-dot dot-paused"></span>Pausada</span>
+    <span class="status"><span class="status-dot dot-scheduled"></span>Programada</span>
+    <span class="status"><span class="status-dot dot-cancelled"></span>Cancelada</span>
+    <span class="status"><span class="status-dot dot-pending"></span>Pendiente</span>
+  </div>
+
+  <!-- BADGES (excepción) -->
+  <h2>Badges · pills de color (excepción decisional)</h2>
+  <p class="note">Solo cuando se busca énfasis deliberado. No es el default.</p>
+  <div class="row">
+    <span class="badge badge-green"><span class="status-dot dot-active"></span>Activa</span>
+    <span class="badge badge-red"><span class="status-dot dot-cancelled"></span>Cancelada</span>
+    <span class="badge badge-indigo"><span class="status-dot dot-scheduled"></span>Programada</span>
+    <span class="badge badge-amber"><span class="status-dot dot-paused"></span>Pausada</span>
+  </div>
+
+  <!-- DROPDOWN -->
+  <h2>Dropdown</h2>
+  <div class="grid">
+    <div>
+      <label class="field-label">Trigger</label>
+      <div class="dropdown-trigger"><span>Selecciona género</span><i class="ti ti-chevron-down"></i></div>
+    </div>
+    <div>
+      <label class="field-label">Menú abierto</label>
+      <div class="dropdown-menu">
+        <div class="dropdown-option">Hombre</div>
+        <div class="dropdown-option selected">Mujer<i class="ti ti-check dropdown-check"></i></div>
+        <div class="dropdown-option">Ambos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOASTS -->
+  <h2>Toasts</h2>
+  <div style="display:flex; flex-direction:column; gap:10px; max-width:420px;">
+    <div class="toast toast-success"><i class="ti ti-circle-check" style="font-size:20px; color:var(--green-500);"></i><div style="flex:1;">Campaña guardada</div><i class="ti ti-x" style="color:var(--text-disabled);"></i></div>
+    <div class="toast toast-error"><i class="ti ti-alert-circle" style="font-size:20px; color:var(--red-500);"></i><div style="flex:1;">No se pudo enviar</div><span style="color:var(--primary); cursor:pointer;">Reintentar</span></div>
+    <div class="toast toast-warning"><i class="ti ti-alert-triangle" style="font-size:20px; color:var(--amber-500);"></i><div style="flex:1;">Hay 3 leads sin correo</div><i class="ti ti-x" style="color:var(--text-disabled);"></i></div>
+    <div class="toast toast-info"><i class="ti ti-info-circle" style="font-size:20px; color:var(--action-500);"></i><div style="flex:1;">Exportación en proceso</div><i class="ti ti-x" style="color:var(--text-disabled);"></i></div>
+  </div>
+
+  <!-- STEPPER -->
+  <h2>Stepper</h2>
+  <div class="row" style="max-width:520px;">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="step-circle step-done"><i class="ti ti-check"></i></div><span style="font-size:var(--text-xs); color:var(--text-secondary);">Seleccionar</span></div>
+    <div class="step-line-done" style="margin-bottom:22px;"></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="step-circle step-current">2</div><span style="font-size:var(--text-xs); color:var(--text-primary); font-weight:500;">Segmentar</span></div>
+    <div class="step-line-pending" style="margin-bottom:22px;"></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="step-circle step-pending">3</div><span style="font-size:var(--text-xs); color:var(--text-disabled);">Mensaje</span></div>
+  </div>
+
+  <!-- LOADING -->
+  <h2>Loading</h2>
+  <div class="row">
+    <button class="btn btn-primary"><span class="spinner" style="width:14px; height:14px; border:2px solid rgba(255,255,255,0.4); border-top-color:#fff;"></span>Enviando…</button>
+    <div style="display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary);"><span class="spinner" style="width:20px; height:20px; border:2px solid var(--neutral-100); border-top-color:var(--primary);"></span>Procesando leads…</div>
+  </div>
+  <div class="table" style="margin-top:12px;">
+    <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; padding:14px 16px;"><div class="skeleton" style="height:12px; width:70%;"></div><div class="skeleton" style="height:20px; width:64px; border-radius:6px;"></div><div class="skeleton" style="height:12px; width:30%;"></div></div>
+    <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; padding:14px 16px; border-top:0.5px solid var(--border-soft);"><div class="skeleton" style="height:12px; width:55%;"></div><div class="skeleton" style="height:20px; width:64px; border-radius:6px;"></div><div class="skeleton" style="height:12px; width:35%;"></div></div>
+  </div>
+
+  <!-- CONTROLES -->
+  <h2>Avatar, checkbox, toggle</h2>
+  <div class="row">
+    <span class="avatar avatar-initials">GP</span>
+    <span class="avatar avatar-placeholder"><i class="ti ti-user" style="font-size:20px;"></i></span>
+    <span style="width:16px;"></span>
+    <span class="checkbox checkbox-off"></span>
+    <span class="checkbox checkbox-on"><i class="ti ti-check"></i></span>
+    <span class="checkbox checkbox-indeterminate">−</span>
+    <span style="width:16px;"></span>
+    <span class="toggle toggle-on"><span class="toggle-knob"></span></span>
+    <span class="toggle toggle-off"><span class="toggle-knob"></span></span>
+  </div>
+
+  <!-- BANNER -->
+  <h2>Banner inline</h2>
+  <div class="banner banner-warning"><i class="ti ti-alert-triangle" style="font-size:18px;"></i>Esta campaña se enviará a 1.345 destinatarios. Verifica la segmentación antes de programar.</div>
+
+  <!-- INDICADOR DE SCORE -->
+  <h2>Indicador de score</h2>
+  <p class="note">Escala continua 0–100. Umbrales: 0-40 rojo, 41-70 ámbar, 71-100 verde. Distinto del semáforo de estados.</p>
+  <div class="row">
+    <div class="score-block score-hero score-high"><span>82</span><span class="score-label">Relevante TI: Sí</span></div>
+    <div class="score-block score-hero score-mid"><span>61</span><span class="score-label">Revisar</span></div>
+    <div class="score-block score-hero score-low"><span>32</span><span class="score-label">Baja</span></div>
+  </div>
+
+  <!-- CARD HORIZONTAL -->
+  <h2>Card horizontal (fila-card con score)</h2>
+  <p class="note">Página en 50, card en 0 — la card flota por ser más clara que el fondo.</p>
+  <div class="list-wrap">
+    <div class="list-card">
+      <div class="score-block score-sm score-high">82</div>
+      <div class="list-card-body">
+        <div class="list-card-title">Sistema gestión proyectos FNDR 8% GORE Valparaíso</div>
+        <div class="list-card-sub">Gobierno Regional V Región · Valparaíso</div>
+        <div class="list-card-meta">Publicado en ChileCompra · Cierre: 20-07-2026</div>
+      </div>
+      <div class="list-card-amount"><div style="font-size:17px; font-weight:700;">$22.000.000</div><div style="font-size:12px; color:var(--text-muted);">Duración: 9 meses</div></div>
+      <div class="list-card-side">
+        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Publicado</div>
+        <span class="status"><span class="status-dot dot-paused"></span>En evaluación <i class="ti ti-chevron-down" style="font-size:14px; color:var(--text-disabled);"></i></span>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Responsable: Bárbara Vivanco</div>
+      </div>
+    </div>
+    <div class="list-card">
+      <div class="score-block score-sm score-low">45</div>
+      <div class="list-card-body">
+        <div class="list-card-title">Plataforma Antivirus Municipalidad de Providencia</div>
+        <div class="list-card-sub">Código 15655-45656-4 · Región Metropolitana</div>
+        <div class="list-card-meta">Publicado en ChileCompra · Cierre: 27-07-2026</div>
+      </div>
+      <div class="list-card-amount"><div style="font-size:17px; font-weight:700;">$30.000.000</div><div style="font-size:12px; color:var(--text-muted);">Duración: 12 meses</div></div>
+      <div class="list-card-side">
+        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Publicado</div>
+        <span class="status"><span class="status-dot dot-active"></span>Adjudicada MT2 <i class="ti ti-chevron-down" style="font-size:14px; color:var(--text-disabled);"></i></span>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Responsable: Bárbara Vivanco</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAGS (reusa badge — categorización) -->
+  <h2>Tags de categorización</h2>
+  <p class="note">No es un componente nuevo: es el badge/pill ya definido, usado con texto de categoría. Un componente, dos usos.</p>
+  <div class="row">
+    <span class="badge badge-scheduled">Desarrollo de plataforma web</span>
+    <span class="badge badge-scheduled">ERP / Software de Gestión / CRM</span>
+    <span class="badge badge-scheduled">Visión computacional</span>
+  </div>
+</div>
+
+</div>
+
+<script>
+const ramps = [
+  { name: 'Verde · éxito / activo', prefix: 'green', steps: ['50','100','200','500','700'] },
+  { name: 'Rojo · error / cancelar', prefix: 'red', steps: ['50','100','200','500','700'] },
+  { name: 'Índigo · programado / proceso', prefix: 'indigo', steps: ['50','100','200','500','700'] },
+  { name: 'Ámbar · precaución', prefix: 'amber', steps: ['50','100','200','500','700'] },
+  { name: 'Azul acción · botones', prefix: 'action', steps: ['50','100','200','500','600','700'] },
+];
+const container = document.getElementById('ramps');
+ramps.forEach(r => {
+  const block = document.createElement('div');
+  block.style.marginBottom = '18px';
+  const label = document.createElement('div');
+  label.style.cssText = 'font-size:13px; margin-bottom:6px; color:var(--text-secondary);';
+  label.textContent = r.name;
+  block.appendChild(label);
+  const strip = document.createElement('div');
+  strip.className = 'row';
+  strip.style.marginBottom = '0';
+  r.steps.forEach(step => {
+    const col = document.createElement('div');
+    col.className = 'col';
+    col.innerHTML = '<div class="swatch" style="background:var(--' + r.prefix + '-' + step + ');"></div><div class="swatch-label">' + step + '</div>';
+    strip.appendChild(col);
+  });
+  block.appendChild(strip);
+  container.appendChild(block);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* ============================================================
+   DEEPVISION DESIGN SYSTEM — COMPONENTES
+   Clases reutilizables construidas sobre tokens.css.
+   Importar tokens.css ANTES que este archivo.
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--surface-page);
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+/* ---------- BOTONES ---------- */
+.btn {
+  height: var(--control-height);
+  padding: 0 18px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: background 0.12s ease;
+}
+.btn-primary { background: var(--primary); color: var(--primary-text); }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-secondary { background: var(--surface-card); color: var(--text-secondary); border: 0.5px solid var(--border-default); }
+.btn-secondary:hover { background: var(--surface-hover); }
+.btn-destructive { background: var(--red-50); color: var(--red-700); border: 0.5px solid var(--red-200); }
+.btn:disabled, .btn-disabled { background: var(--neutral-100); color: var(--text-muted); cursor: not-allowed; }
+
+/* ---------- INPUTS ---------- */
+.input {
+  height: var(--control-height);
+  width: 100%;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  border: 0.5px solid var(--border-default);
+  font-size: var(--text-base);
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: border 0.12s ease, box-shadow 0.12s ease;
+}
+.input::placeholder { color: var(--text-placeholder); }
+.input:focus { outline: none; border: 1px solid var(--border-focus); box-shadow: var(--focus-ring); }
+.input-error { border: 1px solid var(--red-500); }
+.input-success { border: 1px solid var(--green-500); }
+.input:disabled { background: var(--surface-page); border-color: var(--border-soft); color: var(--text-disabled); cursor: not-allowed; }
+
+.field-label { font-size: var(--text-xs); color: var(--text-secondary); display: block; margin-bottom: var(--space-2); }
+.field-error-msg { font-size: var(--text-xs); color: var(--red-700); margin-top: var(--space-1); display: flex; align-items: center; gap: var(--space-1); }
+
+.textarea {
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  border: 0.5px solid var(--border-default);
+  font-size: var(--text-base);
+  font-family: inherit;
+  color: var(--text-primary);
+  resize: vertical;
+}
+.textarea:focus { outline: none; border: 1px solid var(--border-focus); box-shadow: var(--focus-ring); }
+
+/* ---------- BADGES / PILLS (uso decisional, no default) ---------- */
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); padding: 5px 12px; border-radius: var(--radius-sm); }
+.badge-green  { background: var(--green-50);  border: 0.5px solid var(--green-200);  color: var(--green-700); }
+.badge-red    { background: var(--red-50);    border: 0.5px solid var(--red-200);    color: var(--red-700); }
+.badge-indigo { background: var(--indigo-50); border: 0.5px solid var(--indigo-200); color: var(--indigo-700); }
+.badge-amber  { background: var(--amber-50);  border: 0.5px solid var(--amber-200);  color: var(--amber-700); }
+.badge-neutral{ background: var(--neutral-50);border: 0.5px solid var(--border-default); color: var(--text-secondary); }
+
+/* ---------- ESTADO (semáforo: punto + texto neutro — DEFAULT) ---------- */
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-base); color: var(--text-secondary); }
+.status-dot { width: 8px; height: 8px; border-radius: var(--radius-full); display: inline-block; }
+.dot-active     { background: var(--status-active); }
+.dot-cancelled  { background: var(--status-cancelled); }
+.dot-scheduled  { background: var(--status-scheduled); }
+.dot-paused     { background: var(--status-paused); }
+.dot-pending    { background: var(--status-pending); }
+
+/* ---------- CARD ---------- */
+.card { background: var(--surface-card); border: 0.5px solid var(--border-soft); border-radius: var(--radius-card); padding: var(--space-4) var(--space-5); }
+
+/* ---------- DROPDOWN ---------- */
+.dropdown-trigger {
+  height: var(--control-height); padding: 0 14px; border-radius: var(--radius-md);
+  background: var(--surface-card); border: 0.5px solid var(--border-default);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--text-base); color: var(--text-placeholder); cursor: pointer;
+}
+.dropdown-trigger.has-value { color: var(--text-primary); border-color: var(--border-focus); }
+.dropdown-menu {
+  background: var(--surface-card); border: 0.5px solid var(--border-soft);
+  border-radius: var(--radius-lg); padding: 5px; box-shadow: var(--shadow-dropdown);
+}
+.dropdown-option {
+  padding: 9px 12px; border-radius: var(--radius-sm); font-size: var(--text-base);
+  color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+}
+.dropdown-option:hover { background: var(--surface-hover); color: var(--text-primary); }
+.dropdown-option.selected { background: var(--surface-hover); color: var(--text-primary); }
+.dropdown-option.disabled { color: var(--text-disabled); cursor: not-allowed; }
+.dropdown-option.destructive { color: var(--red-700); }
+.dropdown-check { color: var(--primary); }
+
+/* ---------- TOAST ---------- */
+.toast {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  background: var(--surface-card); border: 0.5px solid var(--border-soft);
+  border-radius: var(--radius-md); border-left-width: 3px; border-left-style: solid;
+}
+.toast-success { border-left-color: var(--green-500); }
+.toast-error   { border-left-color: var(--red-500); }
+.toast-warning { border-left-color: var(--amber-500); }
+.toast-info    { border-left-color: var(--action-500); }
+
+/* ---------- TOOLTIP ---------- */
+.tooltip {
+  background: var(--neutral-700); color: var(--neutral-0);
+  font-size: var(--text-xs); padding: 8px 10px; border-radius: var(--radius-sm);
+  max-width: 200px; line-height: 1.5;
+}
+
+/* ---------- STEPPER ---------- */
+.step-circle { width: 32px; height: 32px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: var(--text-base); }
+.step-done    { background: var(--primary); color: var(--primary-text); }
+.step-current { background: var(--surface-card); border: 2px solid var(--primary); color: var(--primary); font-weight: var(--weight-medium); }
+.step-pending { background: var(--surface-card); border: 2px solid var(--border-soft); color: var(--text-disabled); }
+.step-line-done    { height: 2px; background: var(--primary); flex: 1; }
+.step-line-pending { height: 2px; background: var(--border-soft); flex: 1; }
+
+/* ---------- SKELETON / SPINNER ---------- */
+.skeleton { background: linear-gradient(90deg, var(--neutral-50) 25%, var(--neutral-100) 50%, var(--neutral-50) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 4px; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.spinner { border-radius: 50%; display: inline-block; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- AVATAR ---------- */
+.avatar { width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-base); font-weight: var(--weight-medium); }
+.avatar-initials { background: var(--primary); color: var(--primary-text); }
+.avatar-placeholder { background: var(--surface-page); border: 0.5px solid var(--border-soft); color: var(--text-muted); }
+
+/* ---------- TABLE ---------- */
+.table { background: var(--surface-card); border: 0.5px solid var(--border-soft); border-radius: var(--radius-card); overflow: hidden; width: 100%; }
+.table-header { background: var(--surface-page); font-size: var(--text-xs); color: var(--text-muted); }
+.table-row { border-top: 0.5px solid var(--border-soft); font-size: var(--text-base); }
+.table-row:hover { background: var(--surface-hover); }
+.table-row.selected { background: var(--action-50); }
+
+/* ---------- BANNER ---------- */
+.banner { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--radius-md); font-size: var(--text-sm); }
+.banner-warning { background: var(--amber-50); border: 0.5px solid var(--amber-200); color: var(--amber-700); }
+.banner-info    { background: var(--action-50); border: 0.5px solid var(--action-200); color: var(--action-700); }
+.banner-error   { background: var(--red-50); border: 0.5px solid var(--red-200); color: var(--red-700); }
+
+/* ---------- TOGGLE ---------- */
+.toggle { width: 36px; height: 20px; border-radius: var(--radius-full); position: relative; display: inline-block; cursor: pointer; }
+.toggle-on  { background: var(--green-500); }
+.toggle-off { background: var(--neutral-100); }
+.toggle-knob { position: absolute; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--neutral-0); }
+.toggle-on .toggle-knob  { right: 2px; }
+.toggle-off .toggle-knob { left: 2px; }
+
+/* ---------- CHECKBOX ---------- */
+.checkbox { width: 18px; height: 18px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.checkbox-off { border: 1.5px solid var(--border-default); background: transparent; }
+.checkbox-on, .checkbox-indeterminate { background: var(--primary); color: var(--primary-text); font-size: 13px; }
+
+/* ============================================================
+   PATRONES DE LISTA Y FICHA (agregados — módulo Licitaciones)
+   ============================================================ */
+
+/* ---------- INDICADOR DE SCORE (0–100, escala continua) ----------
+   Umbrales: 0-40 rojo · 41-70 ámbar · 71-100 verde.
+   Distinto del semáforo de estados (categorías discretas). */
+.score-block {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--neutral-0); font-weight: var(--weight-bold);
+  flex-shrink: 0;
+}
+.score-sm { width: 64px; align-self: stretch; font-size: 22px; }        /* card horizontal */
+.score-hero { height: 56px; padding: 0 18px; border-radius: var(--radius-md); font-size: 28px; gap: 10px; }
+.score-hero .score-label { font-size: var(--text-sm); font-weight: var(--weight-regular); }
+.score-low  { background: var(--red-500); }
+.score-mid  { background: var(--amber-500); }
+.score-high { background: var(--green-500); }
+
+/* ---------- CARD HORIZONTAL (fila-card con score) ----------
+   Página en 50, card en 0. La card flota por ser más clara. */
+.list-card {
+  display: flex; gap: 12px; align-items: stretch;
+  background: var(--surface-card); border: 0.5px solid var(--border-soft);
+  border-radius: var(--radius-card); overflow: hidden;
+}
+.list-card + .list-card { margin-top: 10px; }
+.list-card-body { flex: 1; padding: 12px 14px; min-width: 0; }
+.list-card-title { font-size: var(--text-md); font-weight: var(--weight-medium); margin-bottom: 2px; }
+.list-card-sub { font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 5px; }
+.list-card-meta { font-size: var(--text-xs); color: var(--text-secondary); }
+.list-card-amount { padding: 12px 14px; text-align: right; flex-shrink: 0; }
+.list-card-side { padding: 12px 14px; flex-shrink: 0; min-width: 150px; border-left: 0.5px solid var(--border-soft); }
+.list-wrap { background: var(--surface-page); border-radius: var(--radius-card); padding: 14px; }
+
+/* ---------- CARD DE MÉTRICA / DETALLE (columnas de ficha) ---------- */
+.detail-col { padding: 0 20px; }
+.detail-col + .detail-col { border-left: 0.5px solid var(--border-soft); }
+.detail-heading { font-size: var(--text-base); font-weight: var(--weight-medium); margin-bottom: 12px; }
