@@ -143,6 +143,7 @@
   --radius-full: 9999px;/* pills, avatares, puntos de estado */
 
   --control-height: 40px;  /* altura estándar de input y botón */
+  --control-height-sm: 32px;  /* compacto — barras de acción en paneles densos */
 
   /* --------------------------------------------------------
      ELEVACIÓN (sombras)
