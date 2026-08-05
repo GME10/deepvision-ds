@@ -37,6 +37,11 @@ body {
 .btn-destructive { background: var(--red-50); color: var(--red-700); border: 0.5px solid var(--red-200); }
 .btn:disabled, .btn-disabled { background: var(--neutral-100); color: var(--text-muted); cursor: not-allowed; }
 
+/* Tamaño compacto (sm) — barras de acción en paneles densos.
+   Se combina con .btn-primary / .btn-secondary / .btn-destructive. */
+.btn-sm { height: var(--control-height-sm); padding: 0 12px; border-radius: var(--radius-sm); font-size: var(--text-sm); gap: var(--space-1); }
+.btn-sm i { font-size: 15px; }
+
 /* ---------- INPUTS ---------- */
 .input {
   height: var(--control-height);
@@ -55,6 +60,9 @@ body {
 .input-error { border: 1px solid var(--red-500); }
 .input-success { border: 1px solid var(--green-500); }
 .input:disabled { background: var(--surface-page); border-color: var(--border-soft); color: var(--text-disabled); cursor: not-allowed; }
+
+/* Tamaño compacto (sm) — para barras de acción alineadas a controles de 32px. */
+.input-sm { height: var(--control-height-sm); padding: 0 10px; border-radius: var(--radius-sm); font-size: var(--text-sm); }
 
 .field-label { font-size: var(--text-xs); color: var(--text-secondary); display: block; margin-bottom: var(--space-2); }
 .field-error-msg { font-size: var(--text-xs); color: var(--red-700); margin-top: var(--space-1); display: flex; align-items: center; gap: var(--space-1); }
