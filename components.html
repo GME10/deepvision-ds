@@ -56,6 +56,29 @@
     <button class="btn btn-primary"><i class="ti ti-plus"></i>Con icono</button>
   </div>
 
+  <!-- BOTONES COMPACTOS (sm) -->
+  <h2>Botones · compactos (sm · 32px)</h2>
+  <p class="note">Segundo paso de altura para barras de acción en paneles densos. Combina .btn-sm con las variantes de color. La base de 40px sigue siendo el default.</p>
+  <div class="row">
+    <button class="btn btn-sm btn-primary"><i class="ti ti-plus"></i>Agregar lead</button>
+    <button class="btn btn-sm btn-secondary"><i class="ti ti-filter"></i>Filtros<i class="ti ti-chevron-down"></i></button>
+    <button class="btn btn-sm btn-secondary"><i class="ti ti-download"></i>Exportar<i class="ti ti-chevron-down"></i></button>
+    <button class="btn btn-sm btn-disabled" disabled>Disabled</button>
+  </div>
+
+  <!-- BARRA DE ACCIÓN COMPACTA -->
+  <h2>Barra de acción compacta</h2>
+  <p class="note">Composición de referencia: buscador que se estira + filtros + exportar + acción primaria, todo alineado a 32px. Encima de una tabla o listado.</p>
+  <div class="row" style="flex-wrap:nowrap; align-items:center;">
+    <div style="position:relative; flex:1; min-width:0;">
+      <i class="ti ti-search" style="position:absolute; left:11px; top:50%; transform:translateY(-50%); font-size:15px; color:var(--text-muted);"></i>
+      <input class="input input-sm" style="padding-left:32px;" placeholder="Buscar por nombre, correo, estado…">
+    </div>
+    <button class="btn btn-sm btn-secondary"><i class="ti ti-filter"></i>Filtros<i class="ti ti-chevron-down"></i></button>
+    <button class="btn btn-sm btn-secondary"><i class="ti ti-download"></i>Exportar<i class="ti ti-chevron-down"></i></button>
+    <button class="btn btn-sm btn-primary"><i class="ti ti-plus"></i>Agregar lead</button>
+  </div>
+
   <!-- INPUTS -->
   <h2>Inputs</h2>
   <div class="grid">
