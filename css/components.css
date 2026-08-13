@@ -15,7 +15,14 @@ body {
   line-height: 1.5;
 }
 
-/* ---------- BOTONES ---------- */
+/* ---------- BOTONES ----------
+   Escala de 3 tamaños según densidad de contexto:
+     md (40px) — default. Formularios, modales, acciones principales.
+     sm (32px) — barras de acción y paneles densos.
+     xs (28px) — densidad alta: celdas de tabla y toolbars. Solo escritorio;
+                 no usar como acción principal ni en mobile (área táctil).
+   Cada tamaño se combina con una variante de color (primary / secondary /
+   destructive) y admite los estados hover, focus, loading y disabled. */
 .btn {
   height: var(--control-height);
   padding: 0 18px;
@@ -27,20 +34,51 @@ body {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
-  transition: background 0.12s ease;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+  position: relative;
 }
+.btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* Variantes de color */
 .btn-primary { background: var(--primary); color: var(--primary-text); }
 .btn-primary:hover { background: var(--primary-hover); }
+.btn-primary:active { background: var(--action-700); }
 .btn-secondary { background: var(--surface-card); color: var(--text-secondary); border: 0.5px solid var(--border-default); }
 .btn-secondary:hover { background: var(--surface-hover); }
+.btn-secondary:active { background: var(--neutral-100); }
 .btn-destructive { background: var(--red-50); color: var(--red-700); border: 0.5px solid var(--red-200); }
-.btn:disabled, .btn-disabled { background: var(--neutral-100); color: var(--text-muted); cursor: not-allowed; }
+.btn-destructive:hover { background: var(--red-100); }
+.btn-destructive:active { background: var(--red-200); }
 
-/* Tamaño compacto (sm) — barras de acción en paneles densos.
-   Se combina con .btn-primary / .btn-secondary / .btn-destructive. */
+/* Estado disabled — aplica a cualquier variante */
+.btn:disabled, .btn-disabled { background: var(--neutral-100); color: var(--text-muted); border-color: transparent; cursor: not-allowed; box-shadow: none; }
+.btn:disabled:hover, .btn-disabled:hover { background: var(--neutral-100); }
+
+/* Estado loading — spinner reemplaza el contenido, mantiene el ancho.
+   Uso: <button class="btn btn-primary btn-loading"><span>Guardar</span></button> */
+.btn-loading { color: transparent !important; pointer-events: none; }
+.btn-loading > * { visibility: hidden; }
+.btn-loading::after {
+  content: ""; position: absolute;
+  width: 15px; height: 15px; border-radius: 50%;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: spin 0.7s linear infinite;
+  color: var(--primary-text);
+}
+.btn-secondary.btn-loading::after { color: var(--text-secondary); }
+.btn-destructive.btn-loading::after { color: var(--red-700); }
+
+/* Tamaño sm (32px) — barras de acción en paneles densos. */
 .btn-sm { height: var(--control-height-sm); padding: 0 12px; border-radius: var(--radius-sm); font-size: var(--text-sm); gap: var(--space-1); }
 .btn-sm i { font-size: 15px; }
+.btn-sm.btn-loading::after { width: 13px; height: 13px; }
+
+/* Tamaño xs (28px) — densidad alta, solo escritorio. */
+.btn-xs { height: var(--control-height-xs); padding: 0 10px; border-radius: var(--radius-sm); font-size: var(--text-sm); gap: var(--space-1); }
+.btn-xs i { font-size: 14px; }
+.btn-xs.btn-loading::after { width: 12px; height: 12px; }
 
 /* ---------- INPUTS ---------- */
 .input {
@@ -225,3 +263,88 @@ body {
 .detail-col { padding: 0 20px; }
 .detail-col + .detail-col { border-left: 0.5px solid var(--border-soft); }
 .detail-heading { font-size: var(--text-base); font-weight: var(--weight-medium); margin-bottom: 12px; }
+
+/* ============================================================
+   LAYOUT DE APLICACIÓN (agregados v0.4 — estructura de página)
+   Topbar, sidebar y footer. Elementos fijos, iguales en toda
+   la app. Extraídos del flujo DIGI.
+   ============================================================ */
+
+/* ---------- TOPBAR / HEADER ----------
+   Alto fijo 64px, fondo card (0), logo a la izquierda, zona de
+   acciones y perfil a la derecha. Divisor inferior suave. */
+.topbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6) 0 10px;
+  background: var(--surface-card);
+  border-bottom: 0.5px solid var(--border-soft);
+}
+.topbar-brand { display: flex; align-items: center; gap: var(--space-3); }
+.topbar-actions { display: flex; align-items: center; gap: var(--space-4); }
+.topbar-divider { width: 1px; height: 28px; background: var(--border-soft); }
+.topbar-icon-btn {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  border: 0.5px solid var(--border-default); background: var(--surface-card);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); cursor: pointer; position: relative;
+}
+.topbar-icon-btn:hover { background: var(--surface-hover); }
+/* Punto de notificación sobre el icono */
+.topbar-icon-btn .dot-badge {
+  position: absolute; top: 7px; right: 8px;
+  width: 6px; height: 6px; border-radius: var(--radius-full);
+  background: var(--red-500); border: 1.5px solid var(--surface-card);
+}
+.topbar-user { display: flex; align-items: center; gap: var(--space-2); }
+.topbar-user-name { font-size: var(--text-base); font-weight: var(--weight-medium); color: var(--text-primary); line-height: 1.2; }
+.topbar-user-role { font-size: var(--text-xs); color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+
+/* ---------- SIDEBAR / MENÚ LATERAL ----------
+   Navegación principal. Ancho 225px expandido / 49px condensado.
+   Ítems: default, seleccionado (fondo neutral-50), deshabilitado. */
+.sidebar {
+  width: 225px;
+  background: var(--surface-card);
+  border-right: 0.5px solid var(--border-soft);
+  padding: var(--space-3) 0;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.sidebar-condensed { width: 49px; }
+.sidebar-item {
+  height: 40px;
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: 0 var(--space-4);
+  font-size: var(--text-xs); font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.sidebar-item i { font-size: 18px; color: var(--text-secondary); flex-shrink: 0; }
+.sidebar-item:hover { background: var(--surface-hover); }
+/* Ítem activo/seleccionado — fondo neutral-50, texto y peso reforzados */
+.sidebar-item.active { background: var(--surface-hover); color: var(--text-primary); font-weight: var(--weight-bold); }
+.sidebar-item.active i { color: var(--text-primary); }
+/* Ítem deshabilitado — módulo aún no disponible */
+.sidebar-item.disabled { color: var(--text-disabled); cursor: not-allowed; }
+.sidebar-item.disabled i { color: var(--text-disabled); }
+/* Chevron de submenú, alineado a la derecha */
+.sidebar-item .sidebar-chevron { margin-left: auto; font-size: 15px; color: var(--text-muted); }
+
+/* ---------- FOOTER ----------
+   Barra inferior fija, alto 30px, metadatos a la izquierda y
+   atribución de marca a la derecha. Texto en neutral-400. */
+.footer {
+  height: 30px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--space-3);
+  background: var(--surface-card);
+  border-top: 0.5px solid var(--border-soft);
+  font-size: var(--text-xs); color: var(--text-muted);
+}
+.footer-left { display: flex; align-items: center; gap: var(--space-4); }
+.footer-left a { color: var(--text-muted); text-decoration: none; }
+.footer-left a:hover { color: var(--text-secondary); }
+.footer-brand { display: flex; align-items: center; gap: 6px; }
+.footer-brand .footer-brand-label { color: var(--text-primary); font-weight: var(--weight-medium); }
