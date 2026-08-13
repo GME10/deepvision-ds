@@ -8,7 +8,7 @@
 
   /* --------------------------------------------------------
      COLOR — ESCALA NEUTRAL (base del sistema)
-     Blanco y grises. El grueso de la UI vive acá.
+     Blanco y grises. El grueso de la UI vive aquí.
      -------------------------------------------------------- */
   --neutral-0:   #FFFFFF;  /* fondos, superficies elevadas */
   --neutral-50:  #F4F7F9;  /* fondo de página, hover de fila, headers de tabla */
@@ -17,6 +17,8 @@
   --neutral-400: #7A8C99;  /* texto secundario, labels, iconos */
   --neutral-500: #4A5A66;  /* texto de cuerpo, texto de énfasis medio */
   --neutral-700: #1E2A33;  /* texto principal, títulos, tooltips */
+  --neutral-800: #101820;  /* overlays de modal, superficies de alto contraste */
+  --neutral-900: #060D12;  /* contraste máximo, fondos oscuros */
 
   /* --------------------------------------------------------
      COLOR — VERDE (éxito / activo)
@@ -46,8 +48,13 @@
   --indigo-50:  #ECEDFB;
   --indigo-100: #D5D8F5;
   --indigo-200: #BEC2F0;  /* borde */
+  --indigo-300: #9EA5EB;
+  --indigo-400: #7D87E5;
   --indigo-500: #5D6AE0;  /* base — punto de estado "programada" */
+  --indigo-600: #535ADF;
   --indigo-700: #494BDE;  /* texto índigo / énfasis profundo */
+  --indigo-800: #3536A0;
+  --indigo-900: #23246B;
 
   /* --------------------------------------------------------
      COLOR — ÁMBAR (precaución / pausada)
@@ -67,9 +74,13 @@
   --action-50:  #E6F2F8;  /* fondo de fila seleccionada, toast info */
   --action-100: #C0DEEC;
   --action-200: #9AC9E0;
+  --action-300: #78B8D7;
+  --action-400: #55A6CF;
   --action-500: #3395C6;  /* base — botón primario, borde de foco, links */
   --action-600: #256F98;  /* hover del botón primario */
   --action-700: #1B5A78;  /* texto azul / pressed */
+  --action-800: #134156;
+  --action-900: #0D2B3A;
 
   /* --------------------------------------------------------
      ROLES SEMÁNTICOS (alias legibles → apuntan a lo de arriba)
@@ -142,8 +153,9 @@
   --radius-card: 12px;  /* cards, contenedores, modales */
   --radius-full: 9999px;/* pills, avatares, puntos de estado */
 
-  --control-height: 40px;  /* altura estándar de input y botón */
-  --control-height-sm: 32px;  /* compacto — barras de acción en paneles densos */
+  --control-height:    40px;  /* md — altura estándar de input y botón */
+  --control-height-sm: 32px;  /* sm — compacto, barras de acción en paneles densos */
+  --control-height-xs: 28px;  /* xs — densidad alta: celdas de tabla y toolbars (solo escritorio) */
 
   /* --------------------------------------------------------
      ELEVACIÓN (sombras)
