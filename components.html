@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DeepVision Design System — Componentes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/components.css">
@@ -20,6 +20,19 @@
     .swatch { height: 44px; border-radius: var(--radius-md); border: 0.5px solid rgba(0,0,0,0.06); }
     .swatch-label { font-size: 11px; color: var(--text-muted); margin-top: 5px; font-family: monospace; }
     .col { flex: 1; min-width: 88px; }
+    /* Muestrario tipográfico */
+    .type-row { display: flex; align-items: baseline; gap: 16px; padding: 14px 0; border-top: 0.5px solid var(--border-soft); }
+    .type-spec { flex: 1; min-width: 0; color: var(--text-primary); }
+    .type-meta { width: 280px; flex-shrink: 0; }
+    .type-meta code { font-size: 12px; color: var(--text-primary); }
+    .type-meta .m-attrs { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+    .type-meta .m-use { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .type-origin { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-left: 8px; vertical-align: middle; }
+    .origin-file { background: var(--action-500); }
+    .origin-added { background: var(--indigo-500); }
+    .type-legend { display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+    .type-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .type-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
   </style>
 </head>
 <body>
@@ -27,6 +40,20 @@
 
   <h1>DeepVision Design System</h1>
   <p class="lede">Sistema base de MT2. Blanco y gris como fundamento, semáforo de color para estados, azul de acción para interacción.</p>
+
+
+  <!-- ====================================================== -->
+  <!--  1 · FUNDAMENTOS  — color y tipografia  -->
+  <!-- ====================================================== -->
+
+  <!-- ESCALA TIPOGRÁFICA -->
+  <h2 style="border-top:none; padding-top:0;">Escala tipográfica</h2>
+  <p class="note">Estilos compuestos con nombre semántico: cada uno empaqueta tamaño, peso, interlineado y tracking. Derivados del uso real en las pantallas maduras del flujo DIGI. Preferir estas clases sobre aplicar tamaño y peso sueltos.</p>
+  <div class="type-legend">
+    <span><i class="origin-file"></i>Derivado del archivo</span>
+    <span><i class="origin-added"></i>Agregado anticipado</span>
+  </div>
+  <div id="typescale"></div>
 
   <!-- ESCALA NEUTRAL -->
   <h2>Escala neutral</h2>
@@ -45,8 +72,13 @@
 
   <!-- GAMAS SEMÁNTICAS -->
   <h2>Gamas semánticas</h2>
-  <p class="note">Tu color anclado en el paso 500. 50/100/200 hacia claros (fondos y bordes), 700 hacia oscuro (texto).</p>
+  <p class="note">El color base anclado en el paso 500. 50/100/200 hacia claros (fondos y bordes), 700 hacia oscuro (texto).</p>
   <div id="ramps"></div>
+
+
+  <!-- ====================================================== -->
+  <!--  2 · ELEMENTOS  — controles atomicos  -->
+  <!-- ====================================================== -->
 
   <!-- BOTONES -->
   <h2>Botones · variantes de color</h2>
@@ -127,6 +159,16 @@
     <div><label class="field-label">Textarea</label><textarea class="textarea" placeholder="Escribe el cuerpo del mensaje…"></textarea></div>
   </div>
 
+  <!-- BADGES (excepción) -->
+  <h2>Badges · pills de color (excepción decisional)</h2>
+  <p class="note">Solo cuando se busca énfasis deliberado. No es el default.</p>
+  <div class="row">
+    <span class="badge badge-green"><span class="status-dot dot-active"></span>Activa</span>
+    <span class="badge badge-red"><span class="status-dot dot-cancelled"></span>Cancelada</span>
+    <span class="badge badge-indigo"><span class="status-dot dot-scheduled"></span>Programada</span>
+    <span class="badge badge-amber"><span class="status-dot dot-paused"></span>Pausada</span>
+  </div>
+
   <!-- ESTADOS (semáforo limpio) -->
   <h2>Estados · semáforo (default)</h2>
   <p class="note">Punto de color + texto neutro. Limpio, sin badges. Es la regla del sistema.</p>
@@ -138,15 +180,24 @@
     <span class="status"><span class="status-dot dot-pending"></span>Pendiente</span>
   </div>
 
-  <!-- BADGES (excepción) -->
-  <h2>Badges · pills de color (excepción decisional)</h2>
-  <p class="note">Solo cuando se busca énfasis deliberado. No es el default.</p>
+  <!-- CONTROLES -->
+  <h2>Avatar, checkbox, toggle</h2>
   <div class="row">
-    <span class="badge badge-green"><span class="status-dot dot-active"></span>Activa</span>
-    <span class="badge badge-red"><span class="status-dot dot-cancelled"></span>Cancelada</span>
-    <span class="badge badge-indigo"><span class="status-dot dot-scheduled"></span>Programada</span>
-    <span class="badge badge-amber"><span class="status-dot dot-paused"></span>Pausada</span>
+    <span class="avatar avatar-initials">GP</span>
+    <span class="avatar avatar-placeholder"><i class="ti ti-user" style="font-size:20px;"></i></span>
+    <span style="width:16px;"></span>
+    <span class="checkbox checkbox-off"></span>
+    <span class="checkbox checkbox-on"><i class="ti ti-check"></i></span>
+    <span class="checkbox checkbox-indeterminate">−</span>
+    <span style="width:16px;"></span>
+    <span class="toggle toggle-on"><span class="toggle-knob"></span></span>
+    <span class="toggle toggle-off"><span class="toggle-knob"></span></span>
   </div>
+
+
+  <!-- ====================================================== -->
+  <!--  3 · COMPONENTES  — bloques compuestos  -->
+  <!-- ====================================================== -->
 
   <!-- DROPDOWN -->
   <h2>Dropdown</h2>
@@ -195,23 +246,14 @@
     <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; padding:14px 16px; border-top:0.5px solid var(--border-soft);"><div class="skeleton" style="height:12px; width:55%;"></div><div class="skeleton" style="height:20px; width:64px; border-radius:6px;"></div><div class="skeleton" style="height:12px; width:35%;"></div></div>
   </div>
 
-  <!-- CONTROLES -->
-  <h2>Avatar, checkbox, toggle</h2>
-  <div class="row">
-    <span class="avatar avatar-initials">GP</span>
-    <span class="avatar avatar-placeholder"><i class="ti ti-user" style="font-size:20px;"></i></span>
-    <span style="width:16px;"></span>
-    <span class="checkbox checkbox-off"></span>
-    <span class="checkbox checkbox-on"><i class="ti ti-check"></i></span>
-    <span class="checkbox checkbox-indeterminate">−</span>
-    <span style="width:16px;"></span>
-    <span class="toggle toggle-on"><span class="toggle-knob"></span></span>
-    <span class="toggle toggle-off"><span class="toggle-knob"></span></span>
-  </div>
-
   <!-- BANNER -->
   <h2>Banner inline</h2>
   <div class="banner banner-warning"><i class="ti ti-alert-triangle" style="font-size:18px;"></i>Esta campaña se enviará a 1.345 destinatarios. Verifica la segmentación antes de programar.</div>
+
+
+  <!-- ====================================================== -->
+  <!--  4 · PATRONES  — combinaciones de dominio  -->
+  <!-- ====================================================== -->
 
   <!-- INDICADOR DE SCORE -->
   <h2>Indicador de score</h2>
@@ -264,6 +306,11 @@
     <span class="badge badge-scheduled">ERP / Software de Gestión / CRM</span>
     <span class="badge badge-scheduled">Visión computacional</span>
   </div>
+
+
+  <!-- ====================================================== -->
+  <!--  5 · LAYOUT  — estructura de aplicacion  -->
+  <!-- ====================================================== -->
 
   <!-- LAYOUT DE APLICACIÓN -->
   <h2>Topbar</h2>
@@ -321,6 +368,36 @@
 </div>
 
 <script>
+const typescale = [
+  { cls:'type-display',       attrs:'28px · Bold 700 · 1.2',        use:'Encabezado mayor de dashboard',        txt:'Panel de control',          o:'added', cap:32 },
+  { cls:'type-kpi',           attrs:'60px · Bold 700 · 1.0',        use:'Número KPI hero (meta semanal)',       txt:'41',                        o:'file',  cap:44 },
+  { cls:'type-lead-name',     attrs:'22px · Semi Bold 600 · 1.2',   use:'Nombre de la entidad protagonista',    txt:'Tristán Molina',            o:'file' },
+  { cls:'type-page-title',    attrs:'20px · Bold 700 · 1.2',        use:'Título de página (H1)',                txt:'Atención de Leads',         o:'file' },
+  { cls:'type-body-lg',       attrs:'15px · Regular 400 · 1.6',     use:'Párrafo de lectura, texto de modal',   txt:'Interesado en 2D·2B con estacionamiento.', o:'added' },
+  { cls:'type-section-title', attrs:'15px · Semi Bold 600 · 1.4',   use:'Título de sección o panel',            txt:'Última actividad',          o:'file' },
+  { cls:'type-body-strong',   attrs:'14px · Medium 500 · 1.4',      use:'Valor o acción inline con énfasis',    txt:'Crear cotización',          o:'file' },
+  { cls:'type-button',        attrs:'14px · Medium 500 · 1.0',      use:'Texto de botón (formaliza .btn)',      txt:'Guardar cambios',           o:'added' },
+  { cls:'type-data',          attrs:'14px · Regular 400 · 1.4',     use:'Dato tabular, valor numérico',         txt:'$ 3.567.890',               o:'file' },
+  { cls:'type-card-title',    attrs:'13px · Medium 500 · 1.4',      use:'Título dentro de card o fila',         txt:'Edificio Vive Domeyko',     o:'file' },
+  { cls:'type-body',          attrs:'13px · Regular 400 · 1.5',     use:'Texto de cuerpo, descripciones',       txt:'2D · 2B · Est · Bodega',    o:'file' },
+  { cls:'type-caption',       attrs:'12px · Regular 400 · 1.4',     use:'Apoyo, footer, timestamps',            txt:'07 agosto 2026 · 16:30 hrs',o:'file' },
+  { cls:'type-overline',      attrs:'12px · Semi Bold 600 · +track',use:'Encabezado de columna (mayúsculas)',   txt:'Última actividad',          o:'file' },
+  { cls:'type-label',         attrs:'11px · Medium 500 · 1.4',      use:'Label de campo, metadato',             txt:'Tareas completadas:',       o:'file' },
+  { cls:'type-nav',           attrs:'10px · Regular 400 · 1.4',     use:'Ítem de navegación (sidebar)',         txt:'Menú Principal',            o:'file' },
+];
+const tsContainer = document.getElementById('typescale');
+typescale.forEach(t => {
+  const row = document.createElement('div');
+  row.className = 'type-row';
+  const capNote = t.cap ? ' <span style="font-size:11px;color:var(--text-muted);">(a ' + t.cap + 'px; real ' + t.attrs.split('px')[0] + 'px)</span>' : '';
+  const capStyle = t.cap ? ' style="font-size:' + t.cap + 'px;"' : '';
+  row.innerHTML =
+    '<div class="type-spec"><span class="' + t.cls + '"' + capStyle + '>' + t.txt + '</span>' + capNote + '</div>' +
+    '<div class="type-meta"><code>.' + t.cls + '</code><span class="type-origin origin-' + t.o + '"></span>' +
+    '<div class="m-attrs">' + t.attrs + '</div><div class="m-use">' + t.use + '</div></div>';
+  tsContainer.appendChild(row);
+});
+
 const ramps = [
   { name: 'Verde · éxito / activo', prefix: 'green', steps: ['50','100','200','500','700'] },
   { name: 'Rojo · error / cancelar', prefix: 'red', steps: ['50','100','200','500','700'] },
