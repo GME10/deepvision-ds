@@ -1,6 +1,45 @@
 # DeepVision Design System
 
+**Versión 0.3**
+
 Sistema de diseño base de **MT2**. Fundamento visual compartido por DeepVision, DIGI y todos los productos que vengan después.
+
+---
+
+## Novedades de la versión 0.3
+
+Esta versión amplía el sistema en tres frentes: profundidad de color, componentes estructurales y la escala de botones.
+
+### Color
+
+- **Rampa índigo completa (10 pasos).** Antes existían 5 pasos (50/100/200/500/700). Se agregaron los intermedios `300`, `400`, `600` y los oscuros `800`, `900`. Los pasos `500` y `700` se mantienen como anclas de marca; los nuevos se derivaron por interpolación uniforme, sin tocar los originales.
+- **Rampa azul de acción completa (10 pasos).** Igual que índigo: se agregaron `300`, `400`, `800`, `900` a los 6 pasos previos. Las anclas de marca `500`, `600` y `700` permanecen sin cambios.
+- **Neutrales oscuros nuevos.** Se agregaron `--neutral-800` (`#101820`) y `--neutral-900` (`#060D12`) para overlays de modal, superficies de alto contraste y fondos oscuros.
+- **Sincronización con Figma.** Las rampas del archivo de diseño se alinearon a estos valores para que Figma y el código compartan exactamente los mismos tokens. El código sigue siendo la fuente de verdad.
+
+### Componentes estructurales
+
+Elementos fijos que se repiten igual en todas las pantallas, extraídos del flujo DIGI. Ahora viven en el sistema en lugar de rearmarse a mano.
+
+- **Topbar** (`.topbar`). Barra superior fija de 64px: marca a la izquierda, zona de acciones y perfil a la derecha. Incluye botón de icono con punto de notificación (`.topbar-icon-btn` + `.dot-badge`), divisor y bloque de usuario con nombre y rol.
+- **Sidebar / menú lateral** (`.sidebar`). Navegación principal de 225px expandida (49px condensada con `.sidebar-condensed`). Define tres estados de ítem: default, activo/seleccionado (`.active`, con fondo neutral-50 y peso reforzado) y deshabilitado (`.disabled`, para módulos aún no disponibles). Chevron opcional para submenús.
+- **Footer** (`.footer`). Barra inferior fija de 30px: metadatos y soporte a la izquierda, atribución de marca a la derecha.
+
+### Escala de botones
+
+Se formalizó una escala de tres tamaños, una por cada densidad de contexto real del producto. El criterio: una escala por contexto que se pueda nombrar, con saltos perceptibles entre tamaños y un piso de 28px por accesibilidad.
+
+- **md** (`.btn`, 40px). Default. Formularios, modales y acciones principales.
+- **sm** (`.btn-sm`, 32px). Barras de acción y paneles densos.
+- **xs** (`.btn-xs`, 28px). Densidad alta: celdas de tabla y toolbars. Solo escritorio; no usar como acción principal ni en mobile por el área táctil.
+
+Cada tamaño se combina con las variantes de color (primario, secundario, destructivo) y admite los estados hover, foco (anillo), carga (`.btn-loading`, con spinner que conserva el ancho) y deshabilitado. Se agregó el token `--control-height-xs` (28px).
+
+También se corrigieron en Figma dos botones sueltos ("Entrar" en el login y "Enviar" en la confirmación de campaña) que usaban un estilo antiguo de 36px con esquinas de pastilla, llevándolos al botón md estándar (40px, radio 8).
+
+El muestrario `components.html` incluye ahora los componentes estructurales, la escala de botones con sus estados y las rampas de color completas.
+
+Pendiente para la próxima versión: definir la escala tipográfica del sistema a partir del uso real en las pantallas, y el pico/flecha del tooltip.
 
 Este repositorio es la **fuente de verdad** del sistema. Está pensado para tres usos:
 
