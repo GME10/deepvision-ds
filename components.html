@@ -30,7 +30,7 @@
 
   <!-- ESCALA NEUTRAL -->
   <h2>Escala neutral</h2>
-  <p class="note">El fundamento. La mayor parte de la UI vive en estos siete pasos.</p>
+  <p class="note">El fundamento. La mayor parte de la UI vive en estos pasos. Los oscuros 800 y 900 se reservan para overlays y alto contraste.</p>
   <div class="row">
     <div class="col"><div class="swatch" style="background:var(--neutral-0); border:0.5px solid var(--neutral-100);"></div><div class="swatch-label">0 · FFFFFF</div></div>
     <div class="col"><div class="swatch" style="background:var(--neutral-50);"></div><div class="swatch-label">50 · F4F7F9</div></div>
@@ -39,6 +39,8 @@
     <div class="col"><div class="swatch" style="background:var(--neutral-400);"></div><div class="swatch-label">400 · 7A8C99</div></div>
     <div class="col"><div class="swatch" style="background:var(--neutral-500);"></div><div class="swatch-label">500 · 4A5A66</div></div>
     <div class="col"><div class="swatch" style="background:var(--neutral-700);"></div><div class="swatch-label">700 · 1E2A33</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-800);"></div><div class="swatch-label">800 · 101820</div></div>
+    <div class="col"><div class="swatch" style="background:var(--neutral-900);"></div><div class="swatch-label">900 · 060D12</div></div>
   </div>
 
   <!-- GAMAS SEMÁNTICAS -->
@@ -47,18 +49,53 @@
   <div id="ramps"></div>
 
   <!-- BOTONES -->
-  <h2>Botones</h2>
+  <h2>Botones · variantes de color</h2>
+  <p class="note">Tres variantes: primario (acción principal), secundario y destructivo. Se combinan con cualquier tamaño de la escala.</p>
   <div class="row">
     <button class="btn btn-primary">Primario</button>
     <button class="btn btn-secondary">Secundario</button>
     <button class="btn btn-destructive">Destructivo</button>
-    <button class="btn btn-disabled" disabled>Disabled</button>
     <button class="btn btn-primary"><i class="ti ti-plus"></i>Con icono</button>
   </div>
 
-  <!-- BOTONES COMPACTOS (sm) -->
-  <h2>Botones · compactos (sm · 32px)</h2>
-  <p class="note">Segundo paso de altura para barras de acción en paneles densos. Combina .btn-sm con las variantes de color. La base de 40px sigue siendo el default.</p>
+  <h2>Botones · escala de tamaño</h2>
+  <p class="note">Una escala por densidad de contexto. md (40px) es el default; sm (32px) para barras de acción y paneles densos; xs (28px) para densidad alta en tablas y toolbars, solo escritorio.</p>
+  <div class="row" style="align-items:flex-end;">
+    <div style="text-align:center;">
+      <button class="btn btn-primary">Botón md</button>
+      <div class="swatch-label">md · 40px</div>
+    </div>
+    <div style="text-align:center;">
+      <button class="btn btn-sm btn-primary">Botón sm</button>
+      <div class="swatch-label">sm · 32px</div>
+    </div>
+    <div style="text-align:center;">
+      <button class="btn btn-xs btn-primary">Botón xs</button>
+      <div class="swatch-label">xs · 28px</div>
+    </div>
+  </div>
+
+  <h2>Botones · estados</h2>
+  <p class="note">Cada botón admite hover, foco (anillo), carga y deshabilitado. Pasa el cursor por encima para ver hover y foco.</p>
+  <div class="row">
+    <button class="btn btn-primary">Normal</button>
+    <button class="btn btn-primary btn-loading"><span>Guardando</span></button>
+    <button class="btn btn-disabled" disabled>Disabled</button>
+  </div>
+  <div class="row">
+    <button class="btn btn-secondary">Normal</button>
+    <button class="btn btn-secondary btn-loading"><span>Cargando</span></button>
+    <button class="btn btn-secondary" disabled>Disabled</button>
+  </div>
+  <div class="row">
+    <button class="btn btn-destructive">Eliminar</button>
+    <button class="btn btn-destructive btn-loading"><span>Eliminando</span></button>
+    <button class="btn btn-destructive" disabled>Disabled</button>
+  </div>
+
+  <!-- BOTONES COMPACTOS (sm) EN CONTEXTO -->
+  <h2>Botones sm · en contexto</h2>
+  <p class="note">La altura sm (32px) alineada a una barra de acción sobre una tabla o listado.</p>
   <div class="row">
     <button class="btn btn-sm btn-primary"><i class="ti ti-plus"></i>Agregar lead</button>
     <button class="btn btn-sm btn-secondary"><i class="ti ti-filter"></i>Filtros<i class="ti ti-chevron-down"></i></button>
@@ -227,6 +264,58 @@
     <span class="badge badge-scheduled">ERP / Software de Gestión / CRM</span>
     <span class="badge badge-scheduled">Visión computacional</span>
   </div>
+
+  <!-- LAYOUT DE APLICACIÓN -->
+  <h2>Topbar</h2>
+  <p class="note">Barra superior fija (64px). Marca a la izquierda; acciones y perfil a la derecha. Igual en toda la app.</p>
+  <div style="border:0.5px solid var(--border-soft); border-radius:var(--radius-card); overflow:hidden;">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <span style="font-weight:var(--weight-bold); font-size:20px; letter-spacing:2px; color:var(--text-primary);">DIGI</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="topbar-icon-btn"><i class="ti ti-bell"></i><span class="dot-badge"></span></button>
+        <div class="topbar-divider"></div>
+        <div class="topbar-user">
+          <span class="avatar avatar-initials" style="width:34px; height:34px; font-size:var(--text-sm);">GP</span>
+          <div>
+            <div class="topbar-user-name">Gabriel Poblete</div>
+            <div class="topbar-user-role"><i class="ti ti-shield-check" style="font-size:13px;"></i>Administrador</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Sidebar · menú lateral</h2>
+  <p class="note">Navegación principal (225px). Estados de ítem: default, activo (fondo neutral-50 + peso reforzado) y deshabilitado (módulo no disponible).</p>
+  <div style="display:inline-block; border:0.5px solid var(--border-soft); border-radius:var(--radius-card); overflow:hidden;">
+    <nav class="sidebar">
+      <div class="sidebar-item active"><i class="ti ti-home"></i>Menú principal</div>
+      <div class="sidebar-item disabled"><i class="ti ti-headset"></i>Postventa</div>
+      <div class="sidebar-item disabled"><i class="ti ti-gavel"></i>Simulador de Objeciones</div>
+      <div class="sidebar-item disabled"><i class="ti ti-user-star"></i>Copiloto de ventas</div>
+      <div class="sidebar-item disabled"><i class="ti ti-businessplan"></i>Centro de clientes</div>
+      <div class="sidebar-item"><i class="ti ti-users"></i>Leads Manager</div>
+      <div class="sidebar-item"><i class="ti ti-ad"></i>Campañas<i class="ti ti-chevron-right sidebar-chevron"></i></div>
+      <div class="sidebar-item"><i class="ti ti-settings"></i>Configuración<i class="ti ti-chevron-right sidebar-chevron"></i></div>
+    </nav>
+  </div>
+
+  <h2>Footer</h2>
+  <p class="note">Barra inferior fija (30px). Metadatos y soporte a la izquierda; atribución de marca a la derecha.</p>
+  <div style="border:0.5px solid var(--border-soft); border-radius:var(--radius-card); overflow:hidden;">
+    <div class="footer">
+      <div class="footer-left">
+        <span>© 2026 Bricsa</span>
+        <a href="#">Soporte</a>
+      </div>
+      <div class="footer-brand">
+        <span>Un producto de</span>
+        <span class="footer-brand-label">MT2</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
@@ -235,9 +324,9 @@
 const ramps = [
   { name: 'Verde · éxito / activo', prefix: 'green', steps: ['50','100','200','500','700'] },
   { name: 'Rojo · error / cancelar', prefix: 'red', steps: ['50','100','200','500','700'] },
-  { name: 'Índigo · programado / proceso', prefix: 'indigo', steps: ['50','100','200','500','700'] },
+  { name: 'Índigo · programado / proceso', prefix: 'indigo', steps: ['50','100','200','300','400','500','600','700','800','900'] },
   { name: 'Ámbar · precaución', prefix: 'amber', steps: ['50','100','200','500','700'] },
-  { name: 'Azul acción · botones', prefix: 'action', steps: ['50','100','200','500','600','700'] },
+  { name: 'Azul acción · botones', prefix: 'action', steps: ['50','100','200','300','400','500','600','700','800','900'] },
 ];
 const container = document.getElementById('ramps');
 ramps.forEach(r => {
