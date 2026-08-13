@@ -1,179 +1,455 @@
 /* ============================================================
-   DEEPVISION DESIGN SYSTEM — TOKENS
-   Fuente de verdad de color, tipografía, espaciado y forma.
-   MT2 · Sistema base para DeepVision, DIGI y productos futuros.
+   DEEPVISION DESIGN SYSTEM — COMPONENTES
+   Clases reutilizables construidas sobre tokens.css.
+   Importar tokens.css ANTES que este archivo.
+
+   Orden por capas (de lo fundacional a lo estructural):
+     1. FUNDAMENTOS  — reset, body, escala tipografica
+     2. ELEMENTOS    — controles atomicos (boton, input, badge...)
+     3. COMPONENTES  — bloques compuestos (card, dropdown, toast...)
+     4. PATRONES     — combinaciones con logica de dominio
+     5. LAYOUT       — estructura de aplicacion (topbar, sidebar, footer)
    ============================================================ */
 
-:root {
+/* ============================================================
+   1 · FUNDAMENTOS
+   Reset, body y escala tipografica.
+   ============================================================ */
 
-  /* --------------------------------------------------------
-     COLOR — ESCALA NEUTRAL (base del sistema)
-     Blanco y grises. El grueso de la UI vive aquí.
-     -------------------------------------------------------- */
-  --neutral-0:   #FFFFFF;  /* fondos, superficies elevadas */
-  --neutral-50:  #F4F7F9;  /* fondo de página, hover de fila, headers de tabla */
-  --neutral-100: #E2E8ED;  /* bordes suaves, divisores */
-  --neutral-200: #BEC8D2;  /* bordes de input, iconos inactivos, placeholders fuertes */
-  --neutral-400: #7A8C99;  /* texto secundario, labels, iconos */
-  --neutral-500: #4A5A66;  /* texto de cuerpo, texto de énfasis medio */
-  --neutral-700: #1E2A33;  /* texto principal, títulos, tooltips */
-  --neutral-800: #101820;  /* overlays de modal, superficies de alto contraste */
-  --neutral-900: #060D12;  /* contraste máximo, fondos oscuros */
+* { box-sizing: border-box; }
 
-  /* --------------------------------------------------------
-     COLOR — VERDE (éxito / activo)
-     Base 500 = color original 56C27D
-     -------------------------------------------------------- */
-  --green-50:  #E8F6EE;  /* fondo de badge/toast/input-éxito */
-  --green-100: #C9EBD6;
-  --green-200: #A9E0C0;  /* borde */
-  --green-500: #56C27D;  /* base — punto de estado, iconos de éxito */
-  --green-700: #1E6B3D;  /* texto verde sobre fondo claro */
-
-  /* --------------------------------------------------------
-     COLOR — ROJO (error / cancelar / destructivo)
-     Base 500 = color original DE5049
-     -------------------------------------------------------- */
-  --red-50:  #FBECEB;
-  --red-100: #F5D3D1;
-  --red-200: #F0BBB8;  /* borde */
-  --red-500: #DE5049;  /* base — punto de estado, error */
-  --red-700: #8A2823;  /* texto rojo sobre fondo claro */
-
-  /* --------------------------------------------------------
-     COLOR — ÍNDIGO (programado / proceso / inteligencia)
-     Base 500 = 5D6AE0 (ajustado para armonizar con el semáforo)
-     700 = 494BDE (tu índigo original, ahora como tono profundo)
-     -------------------------------------------------------- */
-  --indigo-50:  #ECEDFB;
-  --indigo-100: #D5D8F5;
-  --indigo-200: #BEC2F0;  /* borde */
-  --indigo-300: #9EA5EB;
-  --indigo-400: #7D87E5;
-  --indigo-500: #5D6AE0;  /* base — punto de estado "programada" */
-  --indigo-600: #535ADF;
-  --indigo-700: #494BDE;  /* texto índigo / énfasis profundo */
-  --indigo-800: #3536A0;
-  --indigo-900: #23246B;
-
-  /* --------------------------------------------------------
-     COLOR — ÁMBAR (precaución / pausada)
-     Base 500 = color original DEC249
-     -------------------------------------------------------- */
-  --amber-50:  #FBF6E8;
-  --amber-100: #F5EBC9;
-  --amber-200: #F0E0A9;  /* borde */
-  --amber-500: #DEC249;  /* base — punto de estado "pausada", advertencia */
-  --amber-700: #8A7423;  /* texto ámbar sobre fondo claro */
-
-  /* --------------------------------------------------------
-     COLOR — AZUL DE ACCIÓN (botones, foco, links)
-     Base 500 = 3395C6 — NO confundir con índigo (estado).
-     Este azul = "hacer algo". Índigo = "estado del sistema".
-     -------------------------------------------------------- */
-  --action-50:  #E6F2F8;  /* fondo de fila seleccionada, toast info */
-  --action-100: #C0DEEC;
-  --action-200: #9AC9E0;
-  --action-300: #78B8D7;
-  --action-400: #55A6CF;
-  --action-500: #3395C6;  /* base — botón primario, borde de foco, links */
-  --action-600: #256F98;  /* hover del botón primario */
-  --action-700: #1B5A78;  /* texto azul / pressed */
-  --action-800: #134156;
-  --action-900: #0D2B3A;
-
-  /* --------------------------------------------------------
-     ROLES SEMÁNTICOS (alias legibles → apuntan a lo de arriba)
-     Usar estos en los componentes, no los hex directos.
-     -------------------------------------------------------- */
-  --surface-page:      var(--neutral-50);
-  --surface-card:      var(--neutral-0);
-  --surface-hover:     var(--neutral-50);
-
-  --text-primary:      var(--neutral-700);
-  --text-secondary:    var(--neutral-500);
-  --text-muted:        var(--neutral-400);
-  --text-placeholder:  var(--neutral-400);
-  --text-disabled:     var(--neutral-200);
-
-  --border-default:    var(--neutral-200);
-  --border-soft:       var(--neutral-100);
-  --border-focus:      var(--action-500);
-
-  --primary:           var(--action-500);
-  --primary-hover:     var(--action-600);
-  --primary-text:      var(--neutral-0);
-
-  --status-active:     var(--green-500);
-  --status-cancelled:  var(--red-500);
-  --status-scheduled:  var(--indigo-500);
-  --status-paused:     var(--amber-500);
-  --status-pending:    var(--neutral-400);
-
-  /* Score continuo 0–100 (indicador, no semáforo).
-     Umbrales: 0-40 low · 41-70 mid · 71-100 high */
-  --score-low:   var(--red-500);
-  --score-mid:   var(--amber-500);
-  --score-high:  var(--green-500);
-
-  /* --------------------------------------------------------
-     TIPOGRAFÍA
-     -------------------------------------------------------- */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-  /* Tamaños primitivos (átomos). Preferir los estilos compuestos .type-*
-     de components.css; estos son la materia prima de esos estilos. */
-  --text-2xs:  10px;  /* navegación condensada, badges numéricos */
-  --text-xs:   12px;  /* labels, captions, metadata */
-  --text-sm:   13px;  /* texto de apoyo, celdas densas */
-  --text-base: 14px;  /* cuerpo, inputs, botones */
-  --text-md:   15px;  /* nombres, énfasis en listas */
-  --text-lg:   16px;  /* subtítulos de sección */
-  --text-xl:   20px;  /* títulos de página */
-  --text-2xl:  22px;  /* nombre de entidad protagonista (ficha) */
-  --text-3xl:  28px;  /* display — encabezado mayor de dashboard */
-  --text-kpi:  60px;  /* número KPI hero */
-
-  --weight-regular:   400;  /* cuerpo, datos */
-  --weight-medium:    500;  /* labels, títulos de card, énfasis inline */
-  --weight-semibold:  600;  /* títulos de sección y página, overline */
-  --weight-bold:      700;  /* títulos de página, números KPI grandes */
-
-  /* Interlineados de referencia para los estilos de texto */
-  --leading-tight:   1.2;   /* títulos */
-  --leading-snug:    1.4;   /* subtítulos, texto compacto */
-  --leading-normal:  1.5;   /* cuerpo, inputs */
-  --leading-relaxed: 1.6;   /* párrafos de lectura larga */
-
-  /* --------------------------------------------------------
-     ESPACIADO (escala base 4)
-     -------------------------------------------------------- */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-
-  /* --------------------------------------------------------
-     FORMA (radios y alturas)
-     -------------------------------------------------------- */
-  --radius-sm:   6px;   /* badges, opciones de dropdown, chips */
-  --radius-md:   8px;   /* inputs, botones, toasts */
-  --radius-lg:   10px;  /* menús desplegables */
-  --radius-card: 12px;  /* cards, contenedores, modales */
-  --radius-full: 9999px;/* pills, avatares, puntos de estado */
-
-  --control-height:    40px;  /* md — altura estándar de input y botón */
-  --control-height-sm: 32px;  /* sm — compacto, barras de acción en paneles densos */
-  --control-height-xs: 28px;  /* xs — densidad alta: celdas de tabla y toolbars (solo escritorio) */
-
-  /* --------------------------------------------------------
-     ELEVACIÓN (sombras)
-     -------------------------------------------------------- */
-  --shadow-dropdown: 0 8px 24px rgba(30, 42, 51, 0.10);
-  --shadow-modal:    0 16px 48px rgba(30, 42, 51, 0.18);
-  --focus-ring:      0 0 0 3px rgba(51, 149, 198, 0.15);
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--surface-page);
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
 }
+
+/* ---------- ESCALA TIPOGRÁFICA (agregada v0.4) ----------
+   Estilos compuestos con nombre semántico: cada clase empaqueta
+   tamaño + peso + interlineado + tracking. Preferir estas clases
+   sobre aplicar --text-* y --weight-* sueltos.
+
+   La escala se derivó del uso real en las pantallas maduras del
+   flujo DIGI (Leads Manager y campañas consolidadas). Tres estilos
+   se agregaron de forma anticipada para que el sistema escale sin
+   improvisar: type-display, type-body-lg y type-button.
+
+   Peso 600 (Semi Bold): peso oficial de títulos de sección y página.
+   Peso 700 (Bold): reservado a títulos de página y números KPI.
+   ============================================================ */
+
+/* — Display / hero — */
+.type-display {      /* 28/700 — encabezado mayor de dashboard (anticipado) */
+  font-size: var(--text-3xl); font-weight: var(--weight-bold);
+  line-height: var(--leading-tight); letter-spacing: -0.01em;
+}
+.type-kpi {          /* 60/700 — número KPI hero (meta semanal) */
+  font-size: var(--text-kpi); font-weight: var(--weight-bold);
+  line-height: 1; letter-spacing: -0.02em;
+}
+
+/* — Títulos — */
+.type-lead-name {    /* 22/600 — nombre de la entidad protagonista (ficha) */
+  font-size: var(--text-2xl); font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+.type-page-title {   /* 20/700 — título de página (H1) */
+  font-size: var(--text-xl); font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+.type-section-title {/* 15/600 — título de sección o panel */
+  font-size: var(--text-md); font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+.type-card-title {   /* 13/500 — título dentro de card o fila */
+  font-size: var(--text-sm); font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+
+/* — Cuerpo y datos — */
+.type-body-lg {      /* 15/400 — párrafo de lectura, texto de modal (anticipado) */
+  font-size: var(--text-md); font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+}
+.type-body {         /* 13/400 — texto de cuerpo, descripciones */
+  font-size: var(--text-sm); font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+}
+.type-body-strong {  /* 14/500 — valor o acción inline con énfasis */
+  font-size: var(--text-base); font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+.type-data {         /* 14/400 — dato tabular, valor numérico */
+  font-size: var(--text-base); font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+}
+.type-button {       /* 14/500 — texto de botón (formaliza el de .btn) */
+  font-size: var(--text-base); font-weight: var(--weight-medium);
+  line-height: 1;
+}
+
+/* — Metadatos y apoyo — */
+.type-caption {      /* 12/400 — apoyo, footer, timestamps */
+  font-size: var(--text-xs); font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+}
+.type-overline {     /* 12/600 — encabezado de columna (mayúsculas + tracking) */
+  font-size: var(--text-xs); font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug); letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.type-label {        /* 11/500 — label de campo, metadato */
+  font-size: 11px; font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+.type-nav {          /* 10/400 — ítem de navegación (sidebar) */
+  font-size: var(--text-2xs); font-weight: var(--weight-regular);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   2 · ELEMENTOS
+   Controles atomicos. Orden por frecuencia de uso.
+   ============================================================ */
+
+/* ---------- BOTONES ----------
+   Escala de 3 tamaños según densidad de contexto:
+     md (40px) — default. Formularios, modales, acciones principales.
+     sm (32px) — barras de acción y paneles densos.
+     xs (28px) — densidad alta: celdas de tabla y toolbars. Solo escritorio;
+                 no usar como acción principal ni en mobile (área táctil).
+   Cada tamaño se combina con una variante de color (primary / secondary /
+   destructive) y admite los estados hover, focus, loading y disabled. */
+.btn {
+  height: var(--control-height);
+  padding: 0 18px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);      /* = type-button (14/500) */
+  font-weight: var(--weight-medium);
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+  position: relative;
+}
+.btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* Variantes de color */
+.btn-primary { background: var(--primary); color: var(--primary-text); }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-primary:active { background: var(--action-700); }
+.btn-secondary { background: var(--surface-card); color: var(--text-secondary); border: 0.5px solid var(--border-default); }
+.btn-secondary:hover { background: var(--surface-hover); }
+.btn-secondary:active { background: var(--neutral-100); }
+.btn-destructive { background: var(--red-50); color: var(--red-700); border: 0.5px solid var(--red-200); }
+.btn-destructive:hover { background: var(--red-100); }
+.btn-destructive:active { background: var(--red-200); }
+
+/* Estado disabled — aplica a cualquier variante */
+.btn:disabled, .btn-disabled { background: var(--neutral-100); color: var(--text-muted); border-color: transparent; cursor: not-allowed; box-shadow: none; }
+.btn:disabled:hover, .btn-disabled:hover { background: var(--neutral-100); }
+
+/* Estado loading — spinner reemplaza el contenido, mantiene el ancho.
+   Uso: <button class="btn btn-primary btn-loading"><span>Guardar</span></button> */
+.btn-loading { color: transparent !important; pointer-events: none; }
+.btn-loading > * { visibility: hidden; }
+.btn-loading::after {
+  content: ""; position: absolute;
+  width: 15px; height: 15px; border-radius: 50%;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: spin 0.7s linear infinite;
+  color: var(--primary-text);
+}
+.btn-secondary.btn-loading::after { color: var(--text-secondary); }
+.btn-destructive.btn-loading::after { color: var(--red-700); }
+
+/* Tamaño sm (32px) — barras de acción en paneles densos. */
+.btn-sm { height: var(--control-height-sm); padding: 0 12px; border-radius: var(--radius-sm); font-size: var(--text-sm); gap: var(--space-1); }
+.btn-sm i { font-size: 15px; }
+.btn-sm.btn-loading::after { width: 13px; height: 13px; }
+
+/* Tamaño xs (28px) — densidad alta, solo escritorio. */
+.btn-xs { height: var(--control-height-xs); padding: 0 10px; border-radius: var(--radius-sm); font-size: var(--text-sm); gap: var(--space-1); }
+.btn-xs i { font-size: 14px; }
+.btn-xs.btn-loading::after { width: 12px; height: 12px; }
+
+/* ---------- INPUTS ---------- */
+.input {
+  height: var(--control-height);
+  width: 100%;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  border: 0.5px solid var(--border-default);
+  font-size: var(--text-base);
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: border 0.12s ease, box-shadow 0.12s ease;
+}
+.input::placeholder { color: var(--text-placeholder); }
+.input:focus { outline: none; border: 1px solid var(--border-focus); box-shadow: var(--focus-ring); }
+.input-error { border: 1px solid var(--red-500); }
+.input-success { border: 1px solid var(--green-500); }
+.input:disabled { background: var(--surface-page); border-color: var(--border-soft); color: var(--text-disabled); cursor: not-allowed; }
+
+/* Tamaño compacto (sm) — para barras de acción alineadas a controles de 32px. */
+.input-sm { height: var(--control-height-sm); padding: 0 10px; border-radius: var(--radius-sm); font-size: var(--text-sm); }
+
+.field-label { font-size: var(--text-xs); color: var(--text-secondary); display: block; margin-bottom: var(--space-2); }
+.field-error-msg { font-size: var(--text-xs); color: var(--red-700); margin-top: var(--space-1); display: flex; align-items: center; gap: var(--space-1); }
+
+.textarea {
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  border: 0.5px solid var(--border-default);
+  font-size: var(--text-base);
+  font-family: inherit;
+  color: var(--text-primary);
+  resize: vertical;
+}
+.textarea:focus { outline: none; border: 1px solid var(--border-focus); box-shadow: var(--focus-ring); }
+
+/* ---------- BADGES / PILLS (uso decisional, no default) ---------- */
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); padding: 5px 12px; border-radius: var(--radius-sm); }
+.badge-green  { background: var(--green-50);  border: 0.5px solid var(--green-200);  color: var(--green-700); }
+.badge-red    { background: var(--red-50);    border: 0.5px solid var(--red-200);    color: var(--red-700); }
+.badge-indigo { background: var(--indigo-50); border: 0.5px solid var(--indigo-200); color: var(--indigo-700); }
+.badge-amber  { background: var(--amber-50);  border: 0.5px solid var(--amber-200);  color: var(--amber-700); }
+.badge-neutral{ background: var(--neutral-50);border: 0.5px solid var(--border-default); color: var(--text-secondary); }
+
+/* ---------- ESTADO (semáforo: punto + texto neutro — DEFAULT) ---------- */
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-base); color: var(--text-secondary); }
+.status-dot { width: 8px; height: 8px; border-radius: var(--radius-full); display: inline-block; }
+.dot-active     { background: var(--status-active); }
+.dot-cancelled  { background: var(--status-cancelled); }
+.dot-scheduled  { background: var(--status-scheduled); }
+.dot-paused     { background: var(--status-paused); }
+.dot-pending    { background: var(--status-pending); }
+
+/* ---------- TOGGLE ---------- */
+.toggle { width: 36px; height: 20px; border-radius: var(--radius-full); position: relative; display: inline-block; cursor: pointer; }
+.toggle-on  { background: var(--green-500); }
+.toggle-off { background: var(--neutral-100); }
+.toggle-knob { position: absolute; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--neutral-0); }
+.toggle-on .toggle-knob  { right: 2px; }
+.toggle-off .toggle-knob { left: 2px; }
+
+/* ---------- CHECKBOX ---------- */
+.checkbox { width: 18px; height: 18px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.checkbox-off { border: 1.5px solid var(--border-default); background: transparent; }
+.checkbox-on, .checkbox-indeterminate { background: var(--primary); color: var(--primary-text); font-size: 13px; }
+
+/* ---------- AVATAR ---------- */
+.avatar { width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-base); font-weight: var(--weight-medium); }
+.avatar-initials { background: var(--primary); color: var(--primary-text); }
+.avatar-placeholder { background: var(--surface-page); border: 0.5px solid var(--border-soft); color: var(--text-muted); }
+
+/* ============================================================
+   3 · COMPONENTES
+   Bloques compuestos sobre los elementos.
+   ============================================================ */
+
+/* ---------- CARD ---------- */
+.card { background: var(--surface-card); border: 0.5px solid var(--border-soft); border-radius: var(--radius-card); padding: var(--space-4) var(--space-5); }
+
+/* ---------- DROPDOWN ---------- */
+.dropdown-trigger {
+  height: var(--control-height); padding: 0 14px; border-radius: var(--radius-md);
+  background: var(--surface-card); border: 0.5px solid var(--border-default);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--text-base); color: var(--text-placeholder); cursor: pointer;
+}
+.dropdown-trigger.has-value { color: var(--text-primary); border-color: var(--border-focus); }
+.dropdown-menu {
+  background: var(--surface-card); border: 0.5px solid var(--border-soft);
+  border-radius: var(--radius-lg); padding: 5px; box-shadow: var(--shadow-dropdown);
+}
+.dropdown-option {
+  padding: 9px 12px; border-radius: var(--radius-sm); font-size: var(--text-base);
+  color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+}
+.dropdown-option:hover { background: var(--surface-hover); color: var(--text-primary); }
+.dropdown-option.selected { background: var(--surface-hover); color: var(--text-primary); }
+.dropdown-option.disabled { color: var(--text-disabled); cursor: not-allowed; }
+.dropdown-option.destructive { color: var(--red-700); }
+.dropdown-check { color: var(--primary); }
+
+/* ---------- TOAST ---------- */
+.toast {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  background: var(--surface-card); border: 0.5px solid var(--border-soft);
+  border-radius: var(--radius-md); border-left-width: 3px; border-left-style: solid;
+}
+.toast-success { border-left-color: var(--green-500); }
+.toast-error   { border-left-color: var(--red-500); }
+.toast-warning { border-left-color: var(--amber-500); }
+.toast-info    { border-left-color: var(--action-500); }
+
+/* ---------- TOOLTIP ---------- */
+.tooltip {
+  background: var(--neutral-700); color: var(--neutral-0);
+  font-size: var(--text-xs); padding: 8px 10px; border-radius: var(--radius-sm);
+  max-width: 200px; line-height: 1.5;
+}
+
+/* ---------- BANNER ---------- */
+.banner { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--radius-md); font-size: var(--text-sm); }
+.banner-warning { background: var(--amber-50); border: 0.5px solid var(--amber-200); color: var(--amber-700); }
+.banner-info    { background: var(--action-50); border: 0.5px solid var(--action-200); color: var(--action-700); }
+.banner-error   { background: var(--red-50); border: 0.5px solid var(--red-200); color: var(--red-700); }
+
+/* ---------- STEPPER ---------- */
+.step-circle { width: 32px; height: 32px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: var(--text-base); }
+.step-done    { background: var(--primary); color: var(--primary-text); }
+.step-current { background: var(--surface-card); border: 2px solid var(--primary); color: var(--primary); font-weight: var(--weight-medium); }
+.step-pending { background: var(--surface-card); border: 2px solid var(--border-soft); color: var(--text-disabled); }
+.step-line-done    { height: 2px; background: var(--primary); flex: 1; }
+.step-line-pending { height: 2px; background: var(--border-soft); flex: 1; }
+
+/* ---------- TABLE ---------- */
+.table { background: var(--surface-card); border: 0.5px solid var(--border-soft); border-radius: var(--radius-card); overflow: hidden; width: 100%; }
+.table-header { background: var(--surface-page); font-size: var(--text-xs); color: var(--text-muted); }
+.table-row { border-top: 0.5px solid var(--border-soft); font-size: var(--text-base); }
+.table-row:hover { background: var(--surface-hover); }
+.table-row.selected { background: var(--action-50); }
+
+/* ---------- SKELETON / SPINNER ---------- */
+.skeleton { background: linear-gradient(90deg, var(--neutral-50) 25%, var(--neutral-100) 50%, var(--neutral-50) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 4px; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.spinner { border-radius: 50%; display: inline-block; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   4 · PATRONES
+   Combinaciones con logica de dominio (modulo Licitaciones).
+   ============================================================ */
+
+/* ---------- INDICADOR DE SCORE (0–100, escala continua) ----------
+   Umbrales: 0-40 rojo · 41-70 ámbar · 71-100 verde.
+   Distinto del semáforo de estados (categorías discretas). */
+.score-block {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--neutral-0); font-weight: var(--weight-bold);
+  flex-shrink: 0;
+}
+.score-sm { width: 64px; align-self: stretch; font-size: 22px; }        /* card horizontal */
+.score-hero { height: 56px; padding: 0 18px; border-radius: var(--radius-md); font-size: 28px; gap: 10px; }
+.score-hero .score-label { font-size: var(--text-sm); font-weight: var(--weight-regular); }
+.score-low  { background: var(--red-500); }
+.score-mid  { background: var(--amber-500); }
+.score-high { background: var(--green-500); }
+
+/* ---------- CARD HORIZONTAL (fila-card con score) ----------
+   Página en 50, card en 0. La card flota por ser más clara. */
+.list-card {
+  display: flex; gap: 12px; align-items: stretch;
+  background: var(--surface-card); border: 0.5px solid var(--border-soft);
+  border-radius: var(--radius-card); overflow: hidden;
+}
+.list-card + .list-card { margin-top: 10px; }
+.list-card-body { flex: 1; padding: 12px 14px; min-width: 0; }
+.list-card-title { font-size: var(--text-md); font-weight: var(--weight-medium); margin-bottom: 2px; }
+.list-card-sub { font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 5px; }
+.list-card-meta { font-size: var(--text-xs); color: var(--text-secondary); }
+.list-card-amount { padding: 12px 14px; text-align: right; flex-shrink: 0; }
+.list-card-side { padding: 12px 14px; flex-shrink: 0; min-width: 150px; border-left: 0.5px solid var(--border-soft); }
+.list-wrap { background: var(--surface-page); border-radius: var(--radius-card); padding: 14px; }
+
+/* ---------- CARD DE MÉTRICA / DETALLE (columnas de ficha) ---------- */
+.detail-col { padding: 0 20px; }
+.detail-col + .detail-col { border-left: 0.5px solid var(--border-soft); }
+.detail-heading { font-size: var(--text-base); font-weight: var(--weight-medium); margin-bottom: 12px; }
+
+/* ============================================================
+   5 · LAYOUT
+   Estructura de aplicacion. Fija en todas las pantallas.
+   ============================================================ */
+
+/* ---------- TOPBAR / HEADER ----------
+   Alto fijo 64px, fondo card (0), logo a la izquierda, zona de
+   acciones y perfil a la derecha. Divisor inferior suave. */
+.topbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6) 0 10px;
+  background: var(--surface-card);
+  border-bottom: 0.5px solid var(--border-soft);
+}
+.topbar-brand { display: flex; align-items: center; gap: var(--space-3); }
+.topbar-actions { display: flex; align-items: center; gap: var(--space-4); }
+.topbar-divider { width: 1px; height: 28px; background: var(--border-soft); }
+.topbar-icon-btn {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  border: 0.5px solid var(--border-default); background: var(--surface-card);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); cursor: pointer; position: relative;
+}
+.topbar-icon-btn:hover { background: var(--surface-hover); }
+/* Punto de notificación sobre el icono */
+.topbar-icon-btn .dot-badge {
+  position: absolute; top: 7px; right: 8px;
+  width: 6px; height: 6px; border-radius: var(--radius-full);
+  background: var(--red-500); border: 1.5px solid var(--surface-card);
+}
+.topbar-user { display: flex; align-items: center; gap: var(--space-2); }
+.topbar-user-name { font-size: var(--text-base); font-weight: var(--weight-medium); color: var(--text-primary); line-height: 1.2; }
+.topbar-user-role { font-size: var(--text-xs); color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+
+/* ---------- SIDEBAR / MENÚ LATERAL ----------
+   Navegación principal. Ancho 225px expandido / 49px condensado.
+   Ítems: default, seleccionado (fondo neutral-50), deshabilitado. */
+.sidebar {
+  width: 225px;
+  background: var(--surface-card);
+  border-right: 0.5px solid var(--border-soft);
+  padding: var(--space-3) 0;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.sidebar-condensed { width: 49px; }
+.sidebar-item {
+  height: 40px;
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: 0 var(--space-4);
+  font-size: var(--text-xs); font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.sidebar-item i { font-size: 18px; color: var(--text-secondary); flex-shrink: 0; }
+.sidebar-item:hover { background: var(--surface-hover); }
+/* Ítem activo/seleccionado — fondo neutral-50, texto y peso reforzados */
+.sidebar-item.active { background: var(--surface-hover); color: var(--text-primary); font-weight: var(--weight-semibold); }
+.sidebar-item.active i { color: var(--text-primary); }
+/* Ítem deshabilitado — módulo aún no disponible */
+.sidebar-item.disabled { color: var(--text-disabled); cursor: not-allowed; }
+.sidebar-item.disabled i { color: var(--text-disabled); }
+/* Chevron de submenú, alineado a la derecha */
+.sidebar-item .sidebar-chevron { margin-left: auto; font-size: 15px; color: var(--text-muted); }
+
+/* ---------- FOOTER ----------
+   Barra inferior fija, alto 30px, metadatos a la izquierda y
+   atribución de marca a la derecha. Texto en neutral-400. */
+.footer {
+  height: 30px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--space-3);
+  background: var(--surface-card);
+  border-top: 0.5px solid var(--border-soft);
+  font-size: var(--text-xs); color: var(--text-muted);
+}
+.footer-left { display: flex; align-items: center; gap: var(--space-4); }
+.footer-left a { color: var(--text-muted); text-decoration: none; }
+.footer-left a:hover { color: var(--text-secondary); }
+.footer-brand { display: flex; align-items: center; gap: 6px; }
+.footer-brand .footer-brand-label { color: var(--text-primary); font-weight: var(--weight-medium); }
