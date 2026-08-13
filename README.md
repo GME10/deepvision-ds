@@ -1,8 +1,72 @@
 # DeepVision Design System
 
-**Versión 0.3**
+**Versión 0.4**
 
 Sistema de diseño base de **MT2**. Fundamento visual compartido por DeepVision, DIGI y todos los productos que vengan después.
+
+---
+
+## Novedades de la versión 0.4
+
+Esta versión define la **escala tipográfica** del sistema mediante estilos compuestos con nombre semántico. Hasta ahora la tipografía vivía como tokens de tamaño sueltos (`--text-xs` … `--text-xl`) aplicados a mano en cada componente, lo que dejaba que cada pantalla resolviera el peso y el interlineado por su cuenta. La escala 0.4 empaqueta tamaño, peso, interlineado y tracking bajo nombres de uso.
+
+### Método: derivada del uso real
+
+La escala **no** sale de una progresión teórica ni de estándares genéricos. Se escanearon los nodos de texto reales de las pantallas maduras del flujo DIGI (Leads Manager y campañas consolidadas) y se agruparon por frecuencia de uso. Cada estilo compuesto corresponde a un patrón que ya existía en el diseño. El código sigue siendo la fuente de verdad; Figma se alinea a estos valores.
+
+### Peso 600 (Semi Bold): nuevo peso oficial
+
+El hallazgo de fondo del escaneo: las pantallas maduras usaban **cuatro** pesos (400, 500, 600, 700), pero el sistema solo declaraba tres (400/500/700). El peso 600 era el más usado para títulos de sección y no tenía token que lo respaldara. La versión 0.4 lo adopta como peso oficial de títulos, porque el salto 500→700 es demasiado brusco para jerarquía de UI. El 700 queda reservado a títulos de página y números KPI grandes.
+
+Se agregó el token `--weight-semibold: 600`.
+
+### Estilos compuestos
+
+Quince estilos, del cuerpo mayor al menor. Doce derivan directamente del archivo; tres se agregaron de forma anticipada para que el sistema escale sin volver a improvisar (marcados abajo).
+
+| Estilo | Tamaño · Peso · Interlineado | Uso |
+|--------|------------------------------|-----|
+| `type-display` ✦ | 28 · Bold 700 · 1.2 | Encabezado mayor de dashboard |
+| `type-kpi` | 60 · Bold 700 · 1.0 | Número KPI hero |
+| `type-lead-name` | 22 · Semi Bold 600 · 1.2 | Nombre de la entidad protagonista (ficha) |
+| `type-page-title` | 20 · Bold 700 · 1.2 | Título de página (H1) |
+| `type-body-lg` ✦ | 15 · Regular 400 · 1.6 | Párrafo de lectura, texto de modal |
+| `type-section-title` | 15 · Semi Bold 600 · 1.4 | Título de sección o panel |
+| `type-body-strong` | 14 · Medium 500 · 1.4 | Valor o acción inline con énfasis |
+| `type-button` ✦ | 14 · Medium 500 · 1.0 | Texto de botón (formaliza el de `.btn`) |
+| `type-data` | 14 · Regular 400 · 1.4 | Dato tabular, valor numérico |
+| `type-card-title` | 13 · Medium 500 · 1.4 | Título dentro de card o fila |
+| `type-body` | 13 · Regular 400 · 1.5 | Texto de cuerpo, descripciones |
+| `type-caption` | 12 · Regular 400 · 1.4 | Apoyo, footer, timestamps |
+| `type-overline` | 12 · Semi Bold 600 · +tracking | Encabezado de columna (mayúsculas) |
+| `type-label` | 11 · Medium 500 · 1.4 | Label de campo, metadato |
+| `type-nav` | 10 · Regular 400 · 1.4 | Ítem de navegación (sidebar) |
+
+✦ = agregado de forma anticipada, no presente aún en el diseño.
+
+Los tres anticipados llenan huecos ya perceptibles: `type-display` da un título mayor a 22px para cuando exista un dashboard con encabezado; `type-body-lg` cubre el párrafo de lectura cómoda entre el cuerpo de 13 y los títulos (reemplaza los `14px/140%` y `13px/150%` sueltos que aparecían improvisados); y `type-button` formaliza como estilo nombrado la tipografía que hoy vive dentro de `.btn`, para poder referenciarla desde Figma.
+
+### Ajustes derivados
+
+- **Primitivos de tamaño ampliados.** Se agregaron `--text-2xs` (10px), `--text-2xl` (22px), `--text-3xl` (28px) y `--text-kpi` (60px). El token `--text-xl` se ajustó de 22px a 20px, que es el valor real del título de página en el archivo; los 22px pasaron a `--text-2xl`. Se agregaron tokens de interlineado (`--leading-tight/snug/normal/relaxed`).
+- **Sidebar activo corregido.** El ítem de menú activo usaba peso 700 (Bold), fuera de la regla nueva. Se llevó a 600 (Semi Bold), que es el peso de refuerzo correcto para navegación.
+- **Nomenclatura neutralizada.** Se corrigieron comentarios y notas que se dirigían al lector en segunda persona ("tu color original"), llevándolos a lenguaje impersonal de documentación.
+
+### Reorganización por capas (housekeeping)
+
+Los archivos del sistema se reordenaron bajo cinco capas nombradas, de lo fundacional a lo estructural, en lugar del orden cronológico por feature que traían. El criterio es que cualquiera del equipo pueda abrir el repositorio y encontrar las cosas por lógica de lectura, no por historia de versiones. Las capas son:
+
+1. **Fundamentos** — reset, body, color y escala tipográfica.
+2. **Elementos** — controles atómicos (botón, input, badge, estado, avatar…).
+3. **Componentes** — bloques compuestos (card, dropdown, toast, tabla…).
+4. **Patrones** — combinaciones con lógica de dominio (score, card horizontal…).
+5. **Layout** — estructura de aplicación (topbar, sidebar, footer).
+
+`components.css` y `components.html` siguen este orden como espejo; el reordenamiento del CSS movió bloques sin editar ninguna regla (se verificó que el conjunto de 157 reglas quedó idéntico). Esta sección de referencia también sigue el orden de capas.
+
+El muestrario `components.html` incluye ahora una sección de escala tipográfica al inicio, con el espécimen, los metadatos y el origen de cada estilo.
+
+Pendiente para la próxima versión: tokens de espaciado semántico, el modal/overlay como primitiva, patrones de estado vacío/carga/error, grid y anchos de layout, y el pico/flecha del tooltip.
 
 ---
 
@@ -39,7 +103,7 @@ También se corrigieron en Figma dos botones sueltos ("Entrar" en el login y "En
 
 El muestrario `components.html` incluye ahora los componentes estructurales, la escala de botones con sus estados y las rampas de color completas.
 
-Pendiente para la próxima versión: definir la escala tipográfica del sistema a partir del uso real en las pantallas, y el pico/flecha del tooltip.
+Pendiente para la próxima versión: definir la escala tipográfica del sistema a partir del uso real en las pantallas, y el pico/flecha del tooltip. _(La escala tipográfica se resolvió en la versión 0.4.)_
 
 Este repositorio es la **fuente de verdad** del sistema. Está pensado para tres usos:
 
@@ -88,6 +152,23 @@ Todos los tokens son variables CSS en `css/tokens.css`. Se recomienda usar siemp
 
 ---
 
+## Tipografía
+
+El sistema usa **Inter** en cuatro pesos: 400 (Regular), 500 (Medium), 600 (Semi Bold) y 700 (Bold). La tipografía se aplica mediante **estilos compuestos** con nombre semántico (clases `.type-*` en `css/components.css`), no con tokens de tamaño y peso sueltos. Cada estilo empaqueta tamaño, peso, interlineado y tracking según su uso. La lista completa está en "Novedades de la versión 0.4".
+
+- **Preferir los estilos compuestos** (`type-page-title`, `type-body`, `type-label`, etc.) sobre aplicar `--text-*` y `--weight-*` directamente. Los primitivos son la materia prima de los estilos, no la interfaz de uso.
+- **Peso de títulos: 600 (Semi Bold).** Títulos de sección y de página. El salto directo 500→700 quedó descartado por ser demasiado brusco para jerarquía de UI.
+- **Peso 700 (Bold):** reservado a títulos de página (`type-page-title`) y números KPI grandes (`type-kpi`).
+- **La escala se derivó del uso real** en las pantallas maduras del flujo DIGI, no de estándares genéricos.
+
+```html
+<h1 class="type-page-title">Atención de Leads</h1>
+<p class="type-body">Interesado en 2D · 2B con estacionamiento.</p>
+<span class="type-label">Tareas completadas:</span>
+```
+
+---
+
 ## Patrones de lista y ficha (módulo Licitaciones)
 
 Componentes para vistas de listado y ficha de detalle, además de los base.
@@ -126,4 +207,4 @@ Este repositorio contiene el sistema completo de DeepVision. Al construir pantal
 - Los estados de campaña se muestran con punto de color + texto neutro (clase `.status`), no con badges de color.
 - El único azul de botones/acciones es `--primary` (`3395C6`). El índigo (`5D6AE0`) es exclusivo del estado "programado".
 - Altura estándar de inputs y botones: 40px. Radio de cards: 12px. Radio de controles: 8px.
-- Tipografía: Inter, pesos 400 y 500. El peso 700 solo para números KPI grandes.
+- Tipografía: Inter, pesos 400, 500, 600 y 700. Usar los estilos compuestos `.type-*` (ver "Escala tipográfica") en lugar de tamaños y pesos sueltos. Los títulos de sección y página van en 600 (Semi Bold); el 700 (Bold) se reserva a títulos de página y números KPI grandes.
